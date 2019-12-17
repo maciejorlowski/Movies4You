@@ -1,0 +1,72 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/light_gray</item>
+        <item name="colorAccent">@color/red</item>
+    </style>
+
+    <style name="ThemeNoBars" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/light_gray</item>
+        <item name="colorAccent">@color/red</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/light_gray</item>
+    </style>
+
+    <style name="button_open">
+        <item name="android:background">@drawable/button_open_bg</item>
+        <item name="android:textColor">@color/button_open_selector</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="android:textColorHint">@color/header_text</item>
+        <item name="boxStrokeColor">@color/white</item>
+    </style>
+
+    <style name="ErrorText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/error_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="HintText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/header_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="SpinnerTransparent" parent="@android:style/Widget.Spinner">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="MenuTheme" parent="ThemeNoBars">
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="listPreferredItemHeightSmall">26dp</item>
+    </style>
+
+    <style name="rating_bar_small" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/rating_bar_small</item>
+    </style>
+
+    <style name="BaseDialogFullscreen">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="BaseDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+</resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <TextView
+                android:id="@+id/app_frag_movie_details_movie_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/basic_text"
+                android:textSize="10sp"
+                tools:ignore="SmallSp"
+                tools:text="Animacja, przygoda, fatasy" />
+
+        <TextView
+                android:id="@+id/app_frag_movie_details_movie_stats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app_frag_movie_details_movie_category"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/basic_text"
+                android:textSize="10sp"
+                tools:ignore="SmallSp"
+                tools:text="IMDB: 9.3(21 123 głosów) \nInna statystyka: 123\n Kolejna: 123445" />
+
+        <TextView
+                android:id="@+id/app_frag_movie_details_movie_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app_frag_movie_details_movie_stats"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/basic_text"
+                tools:text="trololodasdwonsn hasdfjka sdhashdf auishdf ahifa\n if sauidfhasuidh asdfasuid" />
+
+    </RelativeLayout>
+
+</ScrollView>

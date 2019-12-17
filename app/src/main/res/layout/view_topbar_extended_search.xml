@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/top_bar_extension_searcher"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/bg">
+
+    <EditText
+            android:id="@+id/top_bar_extended_discover_input"
+            android:hint="@string/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/top_bar_extended_discover_search"
+            app:layout_constraintBottom_toBottomOf="@id/top_bar_extended_discover_search"
+            app:layout_constraintEnd_toStartOf="@id/top_bar_extended_discover_search"
+            tools:ignore="Autofill"/>
+
+    <ImageView
+            android:id="@+id/top_bar_extended_discover_search"
+            android:src="@drawable/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/top_bar_extended_discover_filter"
+            app:layout_constraintTop_toTopOf="@id/top_bar_extended_discover_filter"
+            app:layout_constraintEnd_toStartOf="@id/top_bar_extended_discover_filter"
+            tools:ignore="ContentDescription"/>
+
+
+    <ImageView
+            android:id="@+id/top_bar_extended_discover_filter"
+            android:src="@drawable/filter_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@id/top_bar_extended_discover_sort"
+            app:layout_constraintTop_toTopOf="@id/top_bar_extended_discover_sort"
+            app:layout_constraintBottom_toBottomOf="@id/top_bar_extended_discover_sort"
+            tools:ignore="ContentDescription"/>
+
+    <ImageView
+            android:id="@+id/top_bar_extended_discover_sort"
+            android:src="@drawable/filter_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

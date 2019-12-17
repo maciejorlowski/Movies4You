@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">Movies4You</string>
+
+    <string name="cancel">Anuluj</string>
+    <string name="accept">Zatwierdź</string>
+    <string name="close">Zamknij</string>
+    <string name="search">Szukaj</string>
+
+
+    <!--LABELS-->
+    <string name="label_home">Strona domowa</string>
+    <string name="label_my_lists">Moje Listy</string>
+    <string name="label_logout">Wyloguj się</string>
+    <string name="label_movie_details">Szczegóły filmu</string>
+    <string name="label_favorite">Lista ulubionych</string>
+    <string name="label_watchlist">Lista obejrzanych</string>
+    <string name="label_rated">Lista ocenionych</string>
+    <string name="label_other">Własna lista</string>
+
+    <!--TOASTS-->
+    <string name="toast_new_list_empty_title">Tytuł listy nie może pozostać pusty!</string>
+    <string name="tast_add_movie_to_list">Film został dodany do listy</string>
+
+    <!--LOGIN-->
+    <string name="login_button">Zaloguj się</string>
+    <string name="login_as_guest_button">Zaloguj się jako gość</string>
+    <string name="login_login_hint">login</string>
+    <string name="login_password_hint">hasło</string>
+
+    <string name="login_no_account_text">Nie masz konta?</string>
+    <string name="login_register">Zarejestruj się</string>
+
+
+    <!--HOME-->
+    <string name="home_vote_result_max_10">%1$.0f/10</string>
+    <string name="home_page_label">Ostatnio popularne</string>
+
+
+    <!--TOP BAR-->
+    <string name="topbar_welcome_guest_label">Witaj!</string>
+    <string name="topbar_welcome_user_label">Witaj, %s!</string>
+
+
+    <!--MOVIE DETAILS-->
+    <string name="movie_details_label_watched">Obejrzałem</string>
+    <string name="movie_details_count_people_vote">oceniło: %d</string>
+    <string name="movie_details_details_stats">Budżet: %1$d$ \nData Powstania: %2$s \nOryginalny język: %3$s</string>
+    <string name="movie_details_no_description">Film nie posiada jeszcze żadnego opisu</string>
+    <string name="movie_details_info_no_data">Film nie posiada jeszcze żadnych recenzji</string>
+
+
+    <!--RATING DIALOG-->
+    <string name="rating_dialog_title">Oceń film</string>
+    <string name="rating_dialog_vote_max_10">%1$.0f/10</string>
+
+    <!--PERMISSION DIALOG-->
+    <string name="permission_dialog_title">Brak uprawnień</string>
+    <string name="permission_dialog_description">Nie posiadasz uprawnień do wykonania tej akcji.</string>
+    <string name="permission_dialog_action_text">Zaloguj się jako użytkownik TMDB.</string>
+
+    <!--MY LISTS-->
+    <string name="mylists_no_items_available">Nie posiadasz żadnych własnych list.</string>
+    <string name="mylists_title">nazwa</string>
+    <string name="mylists_description">opis</string>
+    <string name="mylists_favorite_title">Ulubione</string>
+    <string name="mylists_watchlist_title">Obejrzane</string>
+    <string name="mylists_rated_title">Ocenione</string>
+    <string name="mylists_add_new_list">Dodaj nową listę</string>
+    <string name="delete_list_dialog_title">Usunąć listę?</string>
+    <string name="delete_list_dialog_desc">Czy na pewno chcesz usunąć tę listę?</string>
+    <string name="clear_list_dialog_title">Wyczyścić listę?</string>
+    <string name="clear_list_dialog_desc">Czy na pewno chcesz wyczyścić tę listę?</string>
+    <string name="delete_movie_from_list_title">Usunąć film z listy?</string>
+    <string name="delete_movie_from_list_description">Czy na pewno chcesz usunąć ten film z listy?</string>
+
+
+
+    <string name="dial_confirm_positive_btn">Zatwierdź</string>
+    <string name="dial_confirm_negative_btn">Odrzuć</string>
+    <string name="label_discover_movies">Odkryj filmy</string>
+
+    <!--DISCOVER-->
+    <string name="discover_sort_dialog_title">Sortowanie</string>
+    <string name="discover_sort_popularity_asc">Popularność rosnąco</string>
+    <string name="discover_sort_popularity_desc">Popularność malejąco</string>
+    <string name="discover_sort_release_date_asc">Data wydania rosnąco</string>
+    <string name="discover_sort_release_date_desc">Data wydania malejąco</string>
+    <string name="discover_sort_revenue_asc">Dochód rosnąco</string>
+    <string name="discover_sort_revenue_desc">Dochód malejąco</string>
+    <string name="discover_sort_original_title_asc">Oryginalny tytuł rosnąco</string>
+    <string name="discover_sort_original_title_desc">Oryginalny tytuł malejąco</string>
+    <string name="discover_sort_vote_average_asc">Ocena rosnąco</string>
+    <string name="discover_sort_vote_average_desc">Ocena malejąco</string>
+    <string name="discover_sort_vote_count_asc">Ilość ocen rosnąco</string>
+    <string name="discover_sort_vote_count_desc">Ilość ocen malejąco</string>
+
+    <string-array name="movie_details_tab_layout_names">
+        <item>Opis</item>
+        <item>Aktorzy</item>
+        <item>Recenzje</item>
+    </string-array>
+</resources>

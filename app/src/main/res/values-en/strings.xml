@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">Movies4You</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+
+    <!--LABELS-->
+    <string name="label_home">Home</string>
+    <string name="label_my_lists">My lists</string>
+    <string name="label_discover_movies">Discover movies</string>
+    <string name="label_logout">Logout</string>
+    <string name="label_movie_details">Movie details</string>
+    <string name="label_favorite">Favorite list</string>
+    <string name="label_watchlist">Watch list</string>
+    <string name="label_rated">Rated list</string>
+    <string name="label_other">Custom list</string>
+
+    <!--TOASTS-->
+    <string name="toast_new_list_empty_title">List title cannot be empty!</string>
+    <string name="tast_add_movie_to_list">The video has been added to the list</string>
+
+
+    <!--LOGIN-->
+    <string name="login_button">Login</string>
+    <string name="login_as_guest_button">Login as guest</string>
+    <string name="login_login_hint">login</string>
+    <string name="login_password_hint">password</string>
+
+    <string name="login_no_account_text">You do not have an account?</string>
+    <string name="login_register">Register</string>
+
+
+    <!--HOME-->
+    <string name="home_vote_result_max_10">%1$.0f/10</string>
+    <string name="home_page_label">Recently popular</string>
+
+
+    <!--TOP BAR-->
+    <string name="topbar_welcome_guest_label">Welcome!</string>
+    <string name="topbar_welcome_user_label">Welcome, %s!</string>
+
+
+    <!--MOVIE DETILS-->
+    <string name="movie_details_label_watched">Watched</string>
+    <string name="movie_details_count_people_vote">rated: %d</string>
+    <string name="movie_details_details_stats">Budget: %1$d$ \nRelease date: %2$s \nOriginal language: %3$s</string>
+    <string name="movie_details_no_description">The film has no description yet</string>
+    <string name="movie_details_info_no_data">The film has no reviews yet</string>
+
+
+    <!--RATING DIALOG-->
+    <string name="rating_dialog_title">Rate the movie</string>
+    <string name="rating_dialog_vote_max_10">%1$.0f/10</string>
+    <!--<string name=""-->
+
+
+    <!--MY LISTS-->
+    <string name="mylists_no_items_available">You don\'t have any own lists.</string>
+    <string name="mylists_title">name</string>
+    <string name="mylists_description">description</string>
+    <string name="mylists_favorite_title">Favorite</string>
+    <string name="mylists_watchlist_title">Watched</string>
+    <string name="mylists_rated_title">Rated</string>
+    <string name="delete_list_dialog_title">Delete list?</string>
+    <string name="delete_list_dialog_desc">Are you sure you want to delete this list?</string>
+    <string name="clear_list_dialog_title">Clear this list?</string>
+    <string name="clear_list_dialog_desc">Are you sure you want to clear this list?</string>
+    <string name="delete_movie_from_list_title">Delete the movie from the list?</string>
+    <string name="delete_movie_from_list_description">Are you sure you want to remove this video from the list?</string>
+
+
+    <string name="dial_confirm_positive_btn">Submit</string>
+    <string name="dial_confirm_negative_btn">Reject</string>
+    <string name="discover_sort_popularity_asc">Popularity ascending</string>
+    <string name="discover_sort_popularity_desc">Popularity descending</string>
+    <string name="discover_sort_original_title_asc">Original title ascending</string>
+    <string name="discover_sort_original_title_desc">Original title descending</string>
+    <string name="discover_sort_release_date_asc">Release date ascending</string>
+    <string name="discover_sort_release_date_desc">Release date descending</string>
+    <string name="discover_sort_revenue_asc">Revenue ascending</string>
+    <string name="discover_sort_revenue_desc">Revenue descending</string>
+    <string name="discover_sort_vote_average_asc">Rate ascending</string>
+    <string name="discover_sort_vote_average_desc">Rate descending</string>
+    <string name="discover_sort_vote_count_asc">Vote count ascending</string>
+    <string name="discover_sort_vote_count_desc">Vote count descending</string>
+    <string name="discover_sort_dialog_title">Sorting</string>
+    <string name="close">Close</string>
+    <string name="permission_dialog_action_text">Login as TMDB user.</string>
+    <string name="permission_dialog_title">No permission</string>
+    <string name="search">Search</string>
+
+    <string-array name="movie_details_tab_layout_names">
+        <item>Description</item>
+        <item>Actors</item>
+        <item>Reviews</item>
+    </string-array>
+</resources>

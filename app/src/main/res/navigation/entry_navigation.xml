@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/entry_navigation"
+            app:startDestination="@+id/loginFragment"
+            tools:ignore="UnusedNavigation">
+
+
+    <fragment android:id="@+id/loginFragment"
+              android:name="com.maciej.movies4you.pages.entryActivity.login.LoginFragment"
+              android:label="LoginFragment"
+              tools:layout="@layout/entry_fragment_login">
+        <action android:id="@+id/action_loginFragment_to_registerFragment" app:destination="@id/registerFragment"
+                app:enterAnim="@anim/enter_slide_down" app:exitAnim="@anim/exit_slide_down"
+                app:popEnterAnim="@anim/pop_enter_slide_up" app:popExitAnim="@anim/pop_exit_slide_up"/>
+    </fragment>
+
+
+    <fragment android:id="@+id/registerFragment"
+              android:name="com.maciej.movies4you.pages.entryActivity.register.RegisterFragment"
+              android:label="RegisterFragment"
+              tools:layout="@layout/entry_fragment_register"/>
+</navigation>

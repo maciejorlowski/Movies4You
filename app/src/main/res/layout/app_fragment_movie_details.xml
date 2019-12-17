@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        tools:background="@drawable/bg">
+
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            <RelativeLayout
+                    android:id="@+id/app_frag_movie_details_header_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                <TextView
+                        android:id="@+id/app_frag_movie_details_movie_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_toStartOf="@+id/app_frag_movie_details_hearth_icon"
+                        android:textColor="@color/header_text"
+                        android:textSize="20sp"
+                        tools:text="Tytuł filmu" />
+
+                <ImageView
+                        android:id="@+id/app_frag_movie_details_hearth_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toStartOf="@+id/app_frag_movie_details_plus_icon"
+                        android:padding="6dp"
+                        android:src="@drawable/favourites_selector"
+                        tools:src="@drawable/big_heart_off" />
+
+                <ImageView
+                        android:id="@+id/app_frag_movie_details_plus_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:padding="6dp"
+                        android:src="@drawable/add"
+                        tools:src="@drawable/add" />
+            </RelativeLayout>
+
+            <ImageView
+                    android:id="@+id/app_frag_movie_details_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/app_frag_movie_details_header_layout"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="200dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/no_image" />
+
+            <TextView
+                    android:id="@+id/app_frag_movie_details_rating_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:layout_below="@+id/app_frag_movie_details_image"
+                    android:layout_marginEnd="4dp"
+                    android:textColor="@color/basic_text"
+                    android:textSize="12sp"
+                    tools:ignore="SmallSp"
+                    tools:text="3/5" />
+
+            <RatingBar
+                    android:id="@+id/app_frag_movie_details_rating_bar"
+                    style="@style/rating_bar_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="12dp"
+                    android:layout_below="@+id/app_frag_movie_details_image"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@+id/app_frag_movie_details_rating_text"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    android:stepSize="0.1" />
+
+            <CheckBox
+                    android:id="@+id/app_frag_movie_details_movie_watched"
+                    android:layout_width="wrap_content"
+                    android:layout_height="11dp"
+                    android:layout_below="@+id/app_frag_movie_details_image"
+                    android:layout_alignParentEnd="true"
+                    android:button="@null"
+                    android:drawableStart="@drawable/checkbox_small"
+
+                    android:drawablePadding="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/movie_details_label_watched"
+                    android:textColor="@color/basic_text"
+                    android:textSize="10sp"
+                    tools:ignore="RtlSymmetry,SmallSp" />
+
+            <TextView
+                    android:id="@+id/app_frag_movie_details_vote_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/app_frag_movie_details_rating_text"
+                    android:textColor="@color/basic_text"
+                    android:textSize="8sp"
+                    tools:ignore="SmallSp"
+                    tools:text="oceniło: 12 576" />
+
+            <com.maciej.movies4you.pages.appActivity.movieDetails.tabLayout.MovieDetailsTabLayout
+                    android:id="@+id/app_frag_movie_details_tab_layout"
+                    style="@style/MyTabLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/app_frag_movie_details_vote_count" />
+
+            <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/app_frag_movie_details_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/app_frag_movie_details_tab_layout" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+            android:id="@+id/app_frag_movie_details_progress_bar"
+            android:layout_width="@dimen/progress_bar_size"
+            android:layout_height="@dimen/progress_bar_size"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
+
+</RelativeLayout>
