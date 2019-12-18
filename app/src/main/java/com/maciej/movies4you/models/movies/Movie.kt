@@ -23,7 +23,7 @@ class Movie(
     val genreIds: Set<Int>,
 
     @SerializedName("original_title")
-    val originalTitle: String,
+    val originalTitle: String?,
 
     @SerializedName("original_language")
     val originalLanguage: String,

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.maciej.movies4you.functional.rest.Rest
 import com.maciej.movies4you.functional.utils.ErrorParser
-import com.maciej.movies4you.pages.appActivity.discover.DiscoverViewModel
 import com.maciej.movies4you.pages.appActivity.home.HomeViewModel
 import com.maciej.movies4you.pages.appActivity.movieDetails.MovieDetailsViewModel
 import com.maciej.movies4you.pages.appActivity.movieDetails.detailsActors.MovieDetailsActorsViewModel

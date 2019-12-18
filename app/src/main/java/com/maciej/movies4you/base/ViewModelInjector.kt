@@ -2,7 +2,7 @@ package com.maciej.movies4you.base
 
 import dagger.Component
 import com.maciej.movies4you.functional.rest.Rest
-import com.maciej.movies4you.pages.appActivity.discover.DiscoverViewModel
+import com.maciej.movies4you.pages.appActivity.search.SearchViewModel
 import com.maciej.movies4you.pages.appActivity.home.HomeViewModel
 import com.maciej.movies4you.pages.appActivity.movieDetails.MovieDetailsViewModel
 import com.maciej.movies4you.pages.appActivity.movieDetails.addMovieToList.AddMovieToListViewModel
@@ -26,7 +26,7 @@ interface ViewModelInjector {
     fun injectMovieDetails(movieDetailsViewModel: MovieDetailsViewModel)
     fun injectMyLists(myListsViewModel: MyListsViewModel)
     fun injectMySingleList(mysingleList: MySingleListViewModel)
-    fun injectDiscover(discoverViewModel: DiscoverViewModel)
+    fun injectDiscover(discoverViewModel: SearchViewModel)
     fun injectmovieDetailsActors(movieDetailsActorsViewModel: MovieDetailsActorsViewModel)
     fun injectmovieDetailsReviews(movieDetailsReviewsViewModel: MovieDetailsReviewsViewModel)
     fun addMovieToList(addMovieToListViewModel: AddMovieToListViewModel)

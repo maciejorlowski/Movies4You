@@ -1,4 +1,4 @@
-package com.maciej.movies4you.pages.appActivity.discover.sorting
+package com.maciej.movies4you.pages.appActivity.search.sorting
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,14 +6,16 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.maciej.movies4you.R
-import com.maciej.movies4you.functional.data.DiscoverSortType
+import com.maciej.movies4you.functional.data.SearchSortType
 
+typealias SelectedListener = (SearchSortType) -> Unit
 
-class SortingAdapter : RecyclerView.Adapter<SortingAdapter.ViewHolder>() {
+class SortingAdapter(private val selectedListener: SelectedListener) :
+    RecyclerView.Adapter<SortingAdapter.ViewHolder>() {
 
-    private var listItems = DiscoverSortType.values()
+    private var listItems = SearchSortType.values()
     private var currentChecked: RadioButton? = null
-    var currentCheckedItem: DiscoverSortType? = null
+    var currentCheckedItem: SearchSortType? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -33,10 +35,8 @@ class SortingAdapter : RecyclerView.Adapter<SortingAdapter.ViewHolder>() {
         }
         holder.item.text = context.getString(item.resNameId)
         holder.item.setOnClickListener {
-            if (currentChecked != holder.item) {
-                currentChecked?.isChecked = false
-                currentChecked = holder.item
-                currentCheckedItem = item
+            if (item != currentCheckedItem) {
+                selectedListener(item)
             }
         }
     }

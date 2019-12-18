@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.maciej.movies4you.functional.data.*
 import com.maciej.movies4you.base.BaseViewModel
 import com.maciej.movies4you.functional.rest.RestInterface
+import com.maciej.movies4you.models.body.ManageListContentBody
+import com.maciej.movies4you.models.body.RatingBody
 import com.maciej.movies4you.models.body.StandardListTypeBody
 import com.maciej.movies4you.models.movies.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -73,7 +75,7 @@ class MySingleListViewModel : BaseViewModel() {
                 .doOnTerminate { onRequestExecute() }
                 .subscribe(
                     {
-                        moviesList.value?.addAll(it.movies)
+                        moviesList.value?.addAll(it.movies.filterNotNull())
                         moviesList.value = moviesList.value
                     },
                     { error ->
@@ -105,36 +107,46 @@ class MySingleListViewModel : BaseViewModel() {
     fun deleteMovieFromList(movie: Movie) {
         when (listType) {
             StandardListType.Favorite -> {
-                deleteMovieRequest(
+                deleteFromStandardRequest(
                     StandardListType.Favorite.queryName,
                     StandardListTypeBody(MediaType.Movie.type, movie.id, favorite = false)
                 ) {
-                    if (it) {
-                        moviesList.value?.remove(movie)
-                        moviesList.value = moviesList.value
-                    }
+                    onRemoveSuccess(movie)
                 }
             }
             StandardListType.Watched -> {
-                deleteMovieRequest(
+                deleteFromStandardRequest(
                     StandardListType.Watched.queryName,
                     StandardListTypeBody(MediaType.Movie.type, movie.id, watchlist = false)
                 ) {
-                    if (it) {
-                        moviesList.value?.remove(movie)
-                        moviesList.value = moviesList.value
-                    }
+                    onRemoveSuccess(movie)
                 }
             }
             StandardListType.Rated -> {
+                //TODO canot remove movies from this list
+//                deleteFromRateListRequest(movie.id) {
+//                    onRemoveSuccess(movie)
+//                }
             }
             StandardListType.Custom -> {
+                deleteFromCustomRequest(listId, ManageListContentBody(movie.id)) {
+                    onRemoveSuccess(movie)
+                }
             }
         }
     }
 
+    private fun onRemoveSuccess(movie: Movie) {
+        moviesList.value?.remove(movie)
+        moviesList.value = moviesList.value
+    }
 
-    private fun deleteMovieRequest(listType: String, requestBody: StandardListTypeBody, done: (Boolean) -> Unit) {
+
+    private fun deleteFromStandardRequest(
+        listType: String,
+        requestBody: StandardListTypeBody,
+        done: (Boolean) -> Unit
+    ) {
         subscription.add(restInterface.modifyStandardList(
             listType,
             Constants.API_KEY,
@@ -154,8 +166,49 @@ class MySingleListViewModel : BaseViewModel() {
                     done(false)
                 }
             ))
-
     }
 
+    private fun deleteFromCustomRequest(
+        listId: Int,
+        requestBody: ManageListContentBody,
+        done: (Boolean) -> Unit
+    ) {
+        subscription.add(restInterface.removeMovieFromList(
+            listId,
+            requestBody
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRequestStart() }
+            .doOnTerminate { onRequestExecute() }
+            .subscribe(
+                {
+                    done(true)
+                },
+                { error ->
+                    onRequestError(error)
+                    done(false)
+                }
+            ))
+    }
 
+    private fun deleteFromRateListRequest(movieId: Int, done: (Boolean) -> Unit) {
+        subscription.add(
+            restInterface.rateMovie(
+                movieId, RatingBody(0F)
+            )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe { onRequestStart() }
+                .doOnTerminate { onRequestExecute() }
+                .subscribe(
+                    {
+                        done(true)
+                    },
+                    { error ->
+                        done(false)
+                        onRequestError(error)
+                    }
+                ))
+    }
 }

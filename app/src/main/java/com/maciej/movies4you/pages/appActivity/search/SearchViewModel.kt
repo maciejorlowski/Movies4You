@@ -1,20 +1,28 @@
-package com.maciej.movies4you.pages.appActivity.home
+package com.maciej.movies4you.pages.appActivity.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.maciej.movies4you.base.BaseViewModel
 import com.maciej.movies4you.functional.data.Constants
 import com.maciej.movies4you.functional.data.SharedPrefs
-import com.maciej.movies4you.base.BaseViewModel
 import com.maciej.movies4you.functional.rest.RestInterface
+import com.maciej.movies4you.models.custom.DiscoverQueryData
 import com.maciej.movies4you.models.movies.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class HomeViewModel : BaseViewModel() {
+class SearchViewModel : BaseViewModel() {
 
     private var movies = MutableLiveData<MutableList<Movie>>()
+
     var pageNr: Int = 0
+
+    var searchQueryData: DiscoverQueryData = DiscoverQueryData()
+        set(value) {
+            field = value
+            loadNextMovies()
+        }
 
     val observableMovies: LiveData<MutableList<Movie>>
         get() = movies
@@ -24,11 +32,23 @@ class HomeViewModel : BaseViewModel() {
 
     init {
         movies.value = mutableListOf()
-        loadNextData()
+        loadNextMovies()
     }
 
-    fun loadNextData() {
-        subscription.plusAssign(restInterface.getPopularMovies(page =  ++pageNr)
+    fun loadNextMovies() {
+        subscription.add(restInterface.discoverMovies(
+            searchQueryData.discoverType.type,
+            Constants.API_KEY, SharedPrefs.getLanguageCode(),
+            ++pageNr,
+            searchQueryData.sortType?.queryName + searchQueryData.sortType?.order?.queryPrefix,
+            searchQueryData.includeAdult,
+            searchQueryData.minReleaseYear,
+            searchQueryData.maxReleaseYear,
+            searchQueryData.minVoteCount,
+            searchQueryData.maxVoteCount,
+            searchQueryData.minVoteAverage,
+            searchQueryData.maxVoteAverage
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .doOnSubscribe { onRequestStart() }
@@ -43,4 +63,11 @@ class HomeViewModel : BaseViewModel() {
                 }
             ))
     }
+
+    fun changeSearchCriteria(){
+        pageNr = 0
+        movies.value?.clear()
+    }
+
+
 }

@@ -11,19 +11,16 @@ import com.maciej.movies4you.functional.data.MediaType
 import com.maciej.movies4you.functional.rxbus.RxBus
 import com.maciej.movies4you.functional.rxbus.RxEvent
 import com.maciej.movies4you.models.custom.DiscoverQueryData
-import com.maciej.movies4you.pages.appActivity.discover.sorting.SortingDialog
+import com.maciej.movies4you.pages.appActivity.search.sorting.SortingDialog
 import kotlinx.android.synthetic.main.view_topbar_extended_discover.view.*
-import androidx.fragment.app.FragmentActivity
-import android.util.Log
 import com.maciej.movies4you.R
-import com.maciej.movies4you.functional.data.DiscoverSortType
 
 
 class TopBarDiscoverExtendedView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), SortingDialog.SortingDialogResult {
+) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private var discoverQueryData = DiscoverQueryData()
+    var discoverQueryData = DiscoverQueryData()
 
     init {
         View.inflate(context, R.layout.view_topbar_extended_discover, this)
@@ -59,7 +56,7 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
 
     private fun setupListeners() {
         top_bar_extended_discover_sort.setOnClickListener {
-            showSortingDialog()
+            SortingDialog.newInstance(discoverQueryData.sortType)
         }
 
         top_bar_extended_discover_search.setOnClickListener {
@@ -72,21 +69,4 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
             //TODO show filter dialog
         }
     }
-
-    private fun showSortingDialog() {
-        val dialog = SortingDialog.newInstance(discoverQueryData.sortType)
-        dialog.setClickListener(this)
-        try {
-            val fragmentManager = (context as FragmentActivity).supportFragmentManager
-            dialog.show(fragmentManager, "dialog")
-
-        } catch (e: ClassCastException) {
-            Log.e("DiscoverExtendedView", "Can't get fragment manager")
-        }
-    }
-
-    override fun onSortingDialogResult(discoverSortType: DiscoverSortType?) {
-        discoverQueryData.sortType = discoverSortType
-    }
-
 }

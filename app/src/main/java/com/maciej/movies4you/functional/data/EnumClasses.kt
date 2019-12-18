@@ -26,17 +26,19 @@ enum class MediaType(var type: String, var position: Int) {
     TVShow("tv", 1)
 }
 
-enum class DiscoverSortType(var queryName: String, @StringRes var resNameId: Int) {
-    POPULARITY_ASC("popularity.asc", R.string.discover_sort_popularity_asc),
-    POPULARITY_DESC("popularity.desc", R.string.discover_sort_popularity_desc),
-    RELEASE_DATE_ASC("release_date.asc", R.string.discover_sort_release_date_asc),
-    RELEASE_DATE_DESC("release_date.desc", R.string.discover_sort_release_date_desc),
-    REVENUE_ASC("revenue.asc", R.string.discover_sort_revenue_asc),
-    REVENUE_DESC("revenue.desc", R.string.discover_sort_revenue_desc),
-    ORIGINAL_TITLE_ASC("original_title.asc", R.string.discover_sort_original_title_asc),
-    ORIGINAL_TITLE_DESC("original_title.desc", R.string.discover_sort_original_title_desc),
-    VOTE_AVERAGE_ASC("vote_average.asc", R.string.discover_sort_vote_average_asc),
-    VOTE_AVERAGE_DESC("vote_average.desc", R.string.discover_sort_vote_average_desc),
-    VOTE_COUNT_ASC("vote_count_asc.asc", R.string.discover_sort_vote_count_asc),
-    VOTE_COUNT_DESC("vote_count_asc.desc", R.string.discover_sort_vote_count_desc)
+enum class SearchSortType(
+    var queryName: String?, @StringRes var resNameId: Int,
+    var order: SearchOrderType?
+) {
+    POPULARITY("popularity", R.string.discover_sort_popularity, SearchOrderType.DESC),
+    RELEASE_DATE("release_date", R.string.discover_sort_release_date, SearchOrderType.DESC),
+    REVENUE("revenue.desc", R.string.discover_sort_revenue, SearchOrderType.DESC),
+    ORIGINAL_TITLE("original_title", R.string.discover_sort_original_title, SearchOrderType.DESC),
+    VOTE_AVERAGE("vote_average", R.string.discover_sort_vote_average, SearchOrderType.DESC),
+    VOTE_COUNT("vote_count_asc", R.string.discover_sort_vote_count, SearchOrderType.DESC)
+}
+
+enum class SearchOrderType(var queryPrefix: String) {
+    ASC(".asc"),
+    DESC(".desc")
 }

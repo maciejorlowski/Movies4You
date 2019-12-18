@@ -5,7 +5,6 @@ import com.maciej.movies4you.functional.data.SharedPrefs
 import com.maciej.movies4you.models.body.*
 import com.maciej.movies4you.models.db.UserDetails
 import com.maciej.movies4you.models.movies.MovieDetails
-import com.maciej.movies4you.models.movies.TVDetails
 import com.maciej.movies4you.models.responses.*
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -67,10 +66,10 @@ interface RestInterface {
     @POST("movie/{movie_id}/rating")
     fun rateMovie(
         @Path("movie_id") movieId: Int,
-        @Query("api_key") apiKey: String,
-        @Query("guest_session_id") guestSessionId: String?,
-        @Query("session_id") sessionId: String?,
-        @Body ratingBody: RatingBody
+        @Body ratingBody: RatingBody,
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+        @Query("guest_session_id") guestSessionId: String = SharedPrefs.getGuestSessionId(),
+        @Query("session_id") sessionId: String = SharedPrefs.getSessionId()
     ): Observable<MoviesResponse>
 
     @GET("discover/{type}")
@@ -103,7 +102,7 @@ interface RestInterface {
     fun createNewList(@Query("api_key") apiKey: String, @Query("session_id") sessionId: String, @Body listBody: ListBody): Observable<CreatelistResponse>
 
     @DELETE("list/{list_id}")
-    fun deleteList(@Path("list_id") listId: Int, @Query("api_key") apiKey: String, @Query("session_id") sessionId: String): Observable<SimpleResponse>
+    fun deleteList(@Path("list_id") listId: String, @Query("api_key") apiKey: String = Constants.API_KEY, @Query("session_id") sessionId: String = SharedPrefs.getSessionId()): Observable<SimpleResponse>
 
     @POST("list/{list_id}/clear")
     fun clearList(
@@ -133,7 +132,15 @@ interface RestInterface {
     @POST("list/{list_id}/add_item")
     fun addMovieToList(
         @Path("list_id") listId: Int,
-        @Body body: AddMovieToListBody,
+        @Body contentBody: ManageListContentBody,
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+        @Query("session_id") sessionId: String = SharedPrefs.getSessionId()
+    ): Observable<SimpleResponse>
+
+    @POST("list/{list_id}/remove_item")
+    fun removeMovieFromList(
+        @Path("list_id") listId: Int,
+        @Body contentBody: ManageListContentBody,
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("session_id") sessionId: String = SharedPrefs.getSessionId()
     ): Observable<SimpleResponse>

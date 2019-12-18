@@ -6,7 +6,7 @@ import com.maciej.movies4you.base.BaseViewModel
 import com.maciej.movies4you.functional.data.Constants
 import com.maciej.movies4you.functional.data.SharedPrefs
 import com.maciej.movies4you.functional.rest.RestInterface
-import com.maciej.movies4you.models.body.AddMovieToListBody
+import com.maciej.movies4you.models.body.ManageListContentBody
 import com.maciej.movies4you.models.movies.UserList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -58,7 +58,7 @@ class AddMovieToListViewModel : BaseViewModel() {
     fun addMovieToList(listId: Int, movieId: Int,done: (Boolean) -> Unit) {
         subscription.add(restInterface.addMovieToList(
             listId,
-            AddMovieToListBody(movieId)
+            ManageListContentBody(movieId)
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { onRequestStart() }

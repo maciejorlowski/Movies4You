@@ -74,25 +74,24 @@
     <string name="delete_movie_from_list_description">Czy na pewno chcesz usunąć ten film z listy?</string>
 
 
-
     <string name="dial_confirm_positive_btn">Zatwierdź</string>
     <string name="dial_confirm_negative_btn">Odrzuć</string>
     <string name="label_discover_movies">Odkryj filmy</string>
 
     <!--DISCOVER-->
+
+
+    <!--    SORTING DIALOG-->
     <string name="discover_sort_dialog_title">Sortowanie</string>
-    <string name="discover_sort_popularity_asc">Popularność rosnąco</string>
-    <string name="discover_sort_popularity_desc">Popularność malejąco</string>
-    <string name="discover_sort_release_date_asc">Data wydania rosnąco</string>
-    <string name="discover_sort_release_date_desc">Data wydania malejąco</string>
-    <string name="discover_sort_revenue_asc">Dochód rosnąco</string>
-    <string name="discover_sort_revenue_desc">Dochód malejąco</string>
-    <string name="discover_sort_original_title_asc">Oryginalny tytuł rosnąco</string>
-    <string name="discover_sort_original_title_desc">Oryginalny tytuł malejąco</string>
-    <string name="discover_sort_vote_average_asc">Ocena rosnąco</string>
-    <string name="discover_sort_vote_average_desc">Ocena malejąco</string>
-    <string name="discover_sort_vote_count_asc">Ilość ocen rosnąco</string>
-    <string name="discover_sort_vote_count_desc">Ilość ocen malejąco</string>
+    <string name="discover_sort_default">Domyślnie</string>
+    <string name="discover_sort_popularity">Popularność</string>
+    <string name="discover_sort_release_date">Data wydania</string>
+    <string name="discover_sort_revenue">Dochód</string>
+    <string name="discover_sort_original_title">Oryginalny tytuł</string>
+    <string name="discover_sort_vote_average">Ocena</string>
+    <string name="discover_sort_vote_count">Ilość ocen</string>
+    <string name="order_asc">rosnąco</string>
+    <string name="order_desc">malejąco</string>
 
     <string-array name="movie_details_tab_layout_names">
         <item>Opis</item>

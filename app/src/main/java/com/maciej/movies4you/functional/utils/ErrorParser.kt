@@ -8,11 +8,13 @@ import retrofit2.HttpException
 import retrofit2.Retrofit
 
 import java.io.IOException
+import java.time.Period
 import java.util.Objects
 
 object ErrorParser {
 
     private const val PERMISSION_CODE = 3
+    private const val INTERNAL_ERROR = 11
 
     fun parseError(error: Throwable, retrofit: Retrofit): String? {
 
@@ -25,16 +27,16 @@ object ErrorParser {
             val apiError: APIError
 
             try {
-                apiError = converter.convert(Objects.requireNonNull<ResponseBody>(response.errorBody()))
+                apiError =
+                    converter.convert(Objects.requireNonNull<ResponseBody>(response.errorBody()))
             } catch (e: IOException) {
                 return APIError().message
             }
 
-            return if (apiError.code != null && apiError.code == PERMISSION_CODE) {
-                RxBus.publish(RxEvent.EventRequestNoPermission())
-                null
-            } else {
-                apiError.message
+            when (apiError.code) {
+                PERMISSION_CODE -> RxBus.publish(RxEvent.EventRequestNoPermission())
+                INTERNAL_ERROR -> return null
+                else -> apiError.message
             }
         }
         return null

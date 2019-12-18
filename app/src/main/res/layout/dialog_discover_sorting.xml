@@ -1,64 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg"
-        android:padding="20dp">
+        android:layout_height="match_parent">
 
-    <ImageView
-            android:id="@+id/dial_sorting_header_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/filter_sort"/>
-
-    <TextView
-            android:id="@+id/dial_sorting_header_title"
+    <View
+            android:id="@+id/dial_sorting_backgroundShadow"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/discover_sort_dialog_title"
-            android:textSize="18sp"
-            android:textColor="@color/header_text"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/dial_sorting_header_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/dial_sorting_header_icon"
-            app:layout_constraintEnd_toStartOf="@+id/dial_sorting_close_button" />
-
-    <ImageView
-            android:id="@+id/dial_sorting_close_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/close"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dial_sorting_adapter"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/dial_sorting_header_title"
-            app:layout_constraintBottom_toTopOf="@+id/dial_sorting_accept_button"/>
-
-    <Button
-            android:id="@+id/dial_sorting_accept_button"
-            style="@style/button_open"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/accept"
-            android:textSize="18sp"
-            android:layout_marginTop="12dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            android:background="@color/black_half_shadowed"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/dial_sorting_drawer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginTop="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dial_sorting_contentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:layout_gravity="start"
+                android:layout_marginEnd="-65dp"
+                android:background="@drawable/bg">
+
+
+            <ImageView
+                    android:id="@+id/dial_sorting_header_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/filter_sort"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:id="@+id/dial_sorting_header_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/discover_sort_dialog_title"
+                    android:textColor="@color/header_text"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/dial_sorting_header_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dial_sorting_header_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                    android:id="@+id/dial_sorting_sort_order"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:checkedButton="@id/dial_sorting_sort_order_desc"
+                    app:layout_constraintBottom_toTopOf="@+id/dial_sorting_adapter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dial_sorting_header_title">
+
+                <RadioButton
+                        android:id="@+id/dial_sorting_sort_order_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:buttonTint="@color/white"
+                        android:text="@string/order_desc" />
+
+                <RadioButton
+                        android:id="@+id/dial_sorting_sort_order_asc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/white"
+                        android:text="@string/order_asc" />
+
+
+
+            </RadioGroup>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dial_sorting_adapter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dial_sorting_sort_order" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -95,7 +95,7 @@ class MovieDetailsViewModel : BaseViewModel() {
     fun rateMovie(rate: Float) {
         subscription.add(
             restInterface.rateMovie(
-                movieId, Constants.API_KEY, null, SharedPrefs.getSessionId(), RatingBody(rate)
+                movieId, RatingBody(rate)
             )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

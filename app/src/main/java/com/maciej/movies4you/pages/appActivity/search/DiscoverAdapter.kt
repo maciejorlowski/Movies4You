@@ -1,4 +1,4 @@
-package com.maciej.movies4you.pages.appActivity.discover
+package com.maciej.movies4you.pages.appActivity.search
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

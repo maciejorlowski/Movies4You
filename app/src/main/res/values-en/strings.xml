@@ -61,6 +61,7 @@
     <string name="mylists_favorite_title">Favorite</string>
     <string name="mylists_watchlist_title">Watched</string>
     <string name="mylists_rated_title">Rated</string>
+    <string name="mylists_add_new_list">Add new list</string>
     <string name="delete_list_dialog_title">Delete list?</string>
     <string name="delete_list_dialog_desc">Are you sure you want to delete this list?</string>
     <string name="clear_list_dialog_title">Clear this list?</string>
@@ -69,25 +70,26 @@
     <string name="delete_movie_from_list_description">Are you sure you want to remove this video from the list?</string>
 
 
+    <!--    SORTING DIALOG-->
     <string name="dial_confirm_positive_btn">Submit</string>
     <string name="dial_confirm_negative_btn">Reject</string>
-    <string name="discover_sort_popularity_asc">Popularity ascending</string>
-    <string name="discover_sort_popularity_desc">Popularity descending</string>
-    <string name="discover_sort_original_title_asc">Original title ascending</string>
-    <string name="discover_sort_original_title_desc">Original title descending</string>
-    <string name="discover_sort_release_date_asc">Release date ascending</string>
-    <string name="discover_sort_release_date_desc">Release date descending</string>
-    <string name="discover_sort_revenue_asc">Revenue ascending</string>
-    <string name="discover_sort_revenue_desc">Revenue descending</string>
-    <string name="discover_sort_vote_average_asc">Rate ascending</string>
-    <string name="discover_sort_vote_average_desc">Rate descending</string>
-    <string name="discover_sort_vote_count_asc">Vote count ascending</string>
-    <string name="discover_sort_vote_count_desc">Vote count descending</string>
     <string name="discover_sort_dialog_title">Sorting</string>
+    <string name="discover_sort_default">Default</string>
+    <string name="discover_sort_popularity">Popularity</string>
+    <string name="discover_sort_release_date">Release date</string>
+    <string name="discover_sort_revenue">Revenue</string>
+    <string name="discover_sort_original_title">Original title</string>
+    <string name="discover_sort_vote_average">Rate</string>
+    <string name="discover_sort_vote_count">Vote count</string>
     <string name="close">Close</string>
-    <string name="permission_dialog_action_text">Login as TMDB user.</string>
-    <string name="permission_dialog_title">No permission</string>
     <string name="search">Search</string>
+    <string name="order_asc">ascending</string>
+    <string name="order_desc">descending</string>
+
+    <!--    PERMISSION DIALOG-->
+    <string name="permission_dialog_action_text">Login as TMDB user.</string>
+    <string name="permission_dialog_description">You do not have permission to perform this action.</string>
+    <string name="permission_dialog_title">No permission</string>
 
     <string-array name="movie_details_tab_layout_names">
         <item>Description</item>

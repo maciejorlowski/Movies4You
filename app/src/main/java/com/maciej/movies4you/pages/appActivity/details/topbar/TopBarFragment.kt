@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.view_topbar.*
 
 class TopBarFragment : BaseAppFragment(), TopBarInteractions {
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.view_topbar, container, false)
     }
@@ -62,5 +61,9 @@ class TopBarFragment : BaseAppFragment(), TopBarInteractions {
         if(data != null) {
             fragment_top_bar_discover_view.updateData(data)
         }
+    }
+
+    override fun updateSearchCriteria(value: DiscoverQueryData) {
+        fragment_top_bar_discover_view.discoverQueryData = value
     }
 }

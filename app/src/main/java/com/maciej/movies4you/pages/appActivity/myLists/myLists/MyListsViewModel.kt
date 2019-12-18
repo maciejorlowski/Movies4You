@@ -26,7 +26,7 @@ class MyListsViewModel : BaseViewModel() {
     @Inject
     lateinit var restInterface: RestInterface
 
-    init {
+    fun init(){
         loadLists()
     }
 
@@ -78,7 +78,7 @@ class MyListsViewModel : BaseViewModel() {
 
     fun deleteList(list: UserList) {
         subscription.add(
-            restInterface.deleteList(list.id, Constants.API_KEY, SharedPrefs.getSessionId())
+            restInterface.deleteList(list.id.toString())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(

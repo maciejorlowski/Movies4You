@@ -51,17 +51,10 @@
     </fragment>
 
     <fragment android:id="@+id/discoverFragment"
-              android:name="com.maciej.movies4you.pages.appActivity.discover.DiscoverFragment"
+              android:name="com.maciej.movies4you.pages.appActivity.search.SearchFragment"
               android:label="DiscoverFragment"
               tools:layout="@layout/app_fragment_discover">
 
-        <argument android:name="pageNr" app:argType="integer"/>
-        <argument android:name="queryData" app:argType="com.maciej.movies4you.models.custom.DiscoverQueryData"/>
-
-        <action android:id="@+id/action_discoverFragment_self" app:destination="@id/discoverFragment"
-                app:enterAnim="@anim/enter_slide_down" app:exitAnim="@anim/exit_slide_down"
-                app:popUpToInclusive="true"
-                app:popEnterAnim="@anim/pop_enter_slide_up" app:popExitAnim="@anim/pop_exit_slide_up"/>
         <action android:id="@+id/action_discoverFragment_to_movieDetailsFragment"
                 app:destination="@id/movieDetailsFragment" app:enterAnim="@anim/enter_slide_down"
                 app:exitAnim="@anim/exit_slide_down" app:popEnterAnim="@anim/pop_enter_slide_up"

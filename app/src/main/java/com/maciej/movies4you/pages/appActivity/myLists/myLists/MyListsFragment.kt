@@ -49,7 +49,11 @@ class MyListsFragment : BaseAppFragment(), ConfirmDialog.ConfirmDialogResult {
         setupObservables()
         setupRecyclerView()
         setupListeners()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.init()
     }
 
     private fun setupStaticLists() {

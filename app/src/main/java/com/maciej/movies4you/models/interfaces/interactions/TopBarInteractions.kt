@@ -10,4 +10,6 @@ interface TopBarInteractions {
 
     fun showExtendedView(value: Boolean, data: DiscoverQueryData?)
 
+    fun updateSearchCriteria(value: DiscoverQueryData)
+
 }
