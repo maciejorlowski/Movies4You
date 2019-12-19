@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import com.maciej.movies4you.base.BaseAppFragment
 import com.maciej.movies4you.functional.plusAssign
 import com.maciej.movies4you.functional.rxbus.RxBus
 import com.maciej.movies4you.functional.rxbus.RxEvent
+import com.maciej.movies4you.functional.viewModel
 import com.maciej.movies4you.models.custom.DiscoverQueryData
 import com.maciej.movies4you.pages.appActivity.movieDetails.addMovieToList.AddMovieToListDialog
 import io.reactivex.disposables.CompositeDisposable
@@ -25,21 +27,21 @@ import kotlinx.android.synthetic.main.app_fragment_discover.*
 
 class SearchFragment : BaseAppFragment() {
 
-    private lateinit var viewModel: SearchViewModel
+    private val viewModel by viewModel<SearchViewModel>()
     private lateinit var discoverAdapter: DiscoverAdapter
 
     private val onMovieClickListener: MovieClickListener = this::onMovieClicked
     private val onAddClickListener: AddClickListener = this::onAddClicked
     private var discoverQueryData = DiscoverQueryData()
 
-    private var rxEventListener: CompositeDisposable = CompositeDisposable()
+    private lateinit var rxEventListener: CompositeDisposable
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
+        rxEventListener = CompositeDisposable()
         return inflater.inflate(R.layout.app_fragment_discover, container, false)
     }
 
@@ -57,7 +59,6 @@ class SearchFragment : BaseAppFragment() {
         actions?.topBar()?.apply {
             showExtendedView(true, discoverQueryData)
             setTitle(getString(R.string.label_discover_movies))
-            actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
         }
     }
 
@@ -102,10 +103,9 @@ class SearchFragment : BaseAppFragment() {
 
     private fun setupEvents() {
         rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesSort::class.java).subscribe {
-            viewModel.searchQueryData = viewModel.searchQueryData.apply {
+            viewModel.changeSearchCriteria(viewModel.searchQueryData.apply {
                 sortType = it.sortType
-            }
-            viewModel.changeSearchCriteria()
+            })
             actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
         })
     }

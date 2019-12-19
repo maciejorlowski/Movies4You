@@ -58,9 +58,6 @@ class TopBarFragment : BaseAppFragment(), TopBarInteractions {
 
     override fun showExtendedView(value: Boolean, data: DiscoverQueryData?) {
         fragment_top_bar_discover_view.visibility = if (value) View.VISIBLE else View.GONE
-        if(data != null) {
-            fragment_top_bar_discover_view.updateData(data)
-        }
     }
 
     override fun updateSearchCriteria(value: DiscoverQueryData) {

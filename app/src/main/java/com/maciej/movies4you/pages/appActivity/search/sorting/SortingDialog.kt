@@ -54,6 +54,11 @@ class SortingDialog : BaseAppDialog() {
 
         setupAdapter()
         setupListeners()
+        when (currentSort?.order) {
+            SearchOrderType.DESC -> dial_sorting_sort_order.check(R.id.dial_sorting_sort_order_desc)
+            SearchOrderType.ASC -> dial_sorting_sort_order.check(R.id.dial_sorting_sort_order_asc)
+            else -> dial_sorting_sort_order.check(R.id.dial_sorting_sort_order_desc)
+        }
 
         onUi(100) {
             showAnimShadowOn()
@@ -73,11 +78,11 @@ class SortingDialog : BaseAppDialog() {
 
     private fun onSortTypeSelected(sortType: SearchSortType) {
         RxBus.publish(RxEvent.EventSearchMoviesSort(sortType.apply {
-                order = when (dial_sorting_sort_order.checkedRadioButtonId) {
-                    R.id.dial_sorting_sort_order_asc -> SearchOrderType.ASC
-                    R.id.dial_sorting_sort_order_desc -> SearchOrderType.DESC
-                    else -> null
-                }
+            order = when (dial_sorting_sort_order.checkedRadioButtonId) {
+                R.id.dial_sorting_sort_order_asc -> SearchOrderType.ASC
+                R.id.dial_sorting_sort_order_desc -> SearchOrderType.DESC
+                else -> null
+            }
         }))
         closeDialog()
     }

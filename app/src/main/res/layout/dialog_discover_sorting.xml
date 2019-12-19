@@ -76,6 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
+                        android:textColor="@color/white"
                         android:buttonTint="@color/white"
                         android:text="@string/order_desc" />
 
@@ -83,6 +84,7 @@
                         android:id="@+id/dial_sorting_sort_order_asc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:buttonTint="@color/white"
                         android:text="@string/order_asc" />
 

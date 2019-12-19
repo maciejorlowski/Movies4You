@@ -19,10 +19,6 @@ class SearchViewModel : BaseViewModel() {
     var pageNr: Int = 0
 
     var searchQueryData: DiscoverQueryData = DiscoverQueryData()
-        set(value) {
-            field = value
-            loadNextMovies()
-        }
 
     val observableMovies: LiveData<MutableList<Movie>>
         get() = movies
@@ -40,7 +36,7 @@ class SearchViewModel : BaseViewModel() {
             searchQueryData.discoverType.type,
             Constants.API_KEY, SharedPrefs.getLanguageCode(),
             ++pageNr,
-            searchQueryData.sortType?.queryName + searchQueryData.sortType?.order?.queryPrefix,
+            searchQueryData.sortType.queryName + searchQueryData.sortType.order?.queryPrefix,
             searchQueryData.includeAdult,
             searchQueryData.minReleaseYear,
             searchQueryData.maxReleaseYear,
@@ -64,9 +60,11 @@ class SearchViewModel : BaseViewModel() {
             ))
     }
 
-    fun changeSearchCriteria(){
+    fun changeSearchCriteria(newQueryData: DiscoverQueryData) {
+        this.searchQueryData = newQueryData
         pageNr = 0
         movies.value?.clear()
+        loadNextMovies()
     }
 
 

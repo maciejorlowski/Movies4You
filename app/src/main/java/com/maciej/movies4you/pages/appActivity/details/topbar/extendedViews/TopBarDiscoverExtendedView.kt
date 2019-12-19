@@ -27,10 +27,6 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
 
         setupSpinner()
         setupListeners()
-    }
-
-    fun updateData(data: DiscoverQueryData){
-        discoverQueryData = data
         prepareViews()
     }
 
