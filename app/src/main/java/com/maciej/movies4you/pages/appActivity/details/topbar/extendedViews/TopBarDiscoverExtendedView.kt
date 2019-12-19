@@ -14,6 +14,7 @@ import com.maciej.movies4you.models.custom.DiscoverQueryData
 import com.maciej.movies4you.pages.appActivity.search.sorting.SortingDialog
 import kotlinx.android.synthetic.main.view_topbar_extended_discover.view.*
 import com.maciej.movies4you.R
+import com.maciej.movies4you.pages.appActivity.search.filter.FilterDialog
 
 
 class TopBarDiscoverExtendedView @JvmOverloads constructor(
@@ -55,14 +56,14 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
             SortingDialog.newInstance(discoverQueryData.sortType)
         }
 
+        top_bar_extended_discover_filter.setOnClickListener {
+            FilterDialog.newInstance(discoverQueryData)
+        }
+
         top_bar_extended_discover_search.setOnClickListener {
             discoverQueryData.discoverType = top_bar_extended_discover_type_spinner.selectedItem as MediaType
             discoverQueryData.includeAdult = top_bar_extended_discover_adult.isChecked
             RxBus.publish(RxEvent.EventDiscoverMovies(discoverQueryData))
-        }
-
-        top_bar_extended_discover_filter.setOnClickListener {
-            //TODO show filter dialog
         }
     }
 }

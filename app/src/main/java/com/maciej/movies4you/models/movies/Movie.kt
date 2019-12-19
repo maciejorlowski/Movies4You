@@ -38,7 +38,7 @@ class Movie(
     val popularity: Double,
 
     @SerializedName("vote_count")
-    val vouteCount: Int,
+    val voteCount: Int,
 
     @SerializedName("video")
     val video: Boolean,
