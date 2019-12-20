@@ -11,7 +11,9 @@ import androidx.core.view.GravityCompat
 import com.inverce.mod.v2.core.onUi
 import com.maciej.movies4you.R
 import com.maciej.movies4you.base.BaseAppDialog
-import com.maciej.movies4you.models.custom.DiscoverQueryData
+import com.maciej.movies4you.functional.rxbus.RxBus
+import com.maciej.movies4you.functional.rxbus.RxEvent
+import com.maciej.movies4you.models.custom.search.FilterQueryData
 import kotlinx.android.synthetic.main.dialog_search_filter.*
 
 class FilterDialog : BaseAppDialog() {
@@ -21,13 +23,13 @@ class FilterDialog : BaseAppDialog() {
 
 
     companion object {
-        fun newInstance(currentFilters: DiscoverQueryData) = FilterDialog().apply {
+        fun newInstance(currentFilters: FilterQueryData) = FilterDialog().apply {
             this.currentFilters = currentFilters
         }.show()
     }
 
     //    private val selectedListener: SelectedListener = this::onSortTypeSelected
-    private var currentFilters: DiscoverQueryData? = null
+    private var currentFilters: FilterQueryData? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         setStyle(STYLE_NO_TITLE, R.style.BaseDialogFullscreen)
@@ -93,6 +95,10 @@ class FilterDialog : BaseAppDialog() {
 
         dial_search_filter_backgroundShadow.setOnClickListener {
             closeDialog()
+        }
+
+        dial_search_filter_showBtn.setOnClickListener {
+            RxBus.publish(RxEvent.EventSearchMoviesFilter(currentFilters))
         }
     }
 

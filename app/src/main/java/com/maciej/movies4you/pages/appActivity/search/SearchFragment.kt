@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +18,7 @@ import com.maciej.movies4you.functional.plusAssign
 import com.maciej.movies4you.functional.rxbus.RxBus
 import com.maciej.movies4you.functional.rxbus.RxEvent
 import com.maciej.movies4you.functional.viewModel
-import com.maciej.movies4you.models.custom.DiscoverQueryData
+import com.maciej.movies4you.models.custom.search.DiscoverQueryData
 import com.maciej.movies4you.pages.appActivity.movieDetails.addMovieToList.AddMovieToListDialog
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.app_fragment_discover.*
@@ -105,6 +103,13 @@ class SearchFragment : BaseAppFragment() {
         rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesSort::class.java).subscribe {
             viewModel.changeSearchCriteria(viewModel.searchQueryData.apply {
                 sortType = it.sortType
+            })
+            actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
+        })
+
+        rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesPrefix::class.java).subscribe {
+            viewModel.changeSearchCriteria(viewModel.searchQueryData.apply {
+                searchPrefix = it.prefix
             })
             actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
         })

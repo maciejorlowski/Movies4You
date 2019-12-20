@@ -6,7 +6,6 @@
         android:id="@+id/top_bar_extension_searcher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         tools:background="@drawable/bg">
 
     <Spinner
@@ -23,43 +22,47 @@
     <ImageView
             android:id="@+id/top_bar_extended_discover_filter"
             android:src="@drawable/filter_filter"
-            android:layout_width="21dp"
-            android:layout_height="13dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="@id/top_bar_extended_discover_sort"
-            app:layout_constraintBottom_toBottomOf="@id/top_bar_extended_discover_sort"
-            app:layout_constraintStart_toEndOf="@+id/top_bar_extended_discover_type_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
     />
 
     <ImageView
             android:id="@+id/top_bar_extended_discover_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="10dp"
             android:src="@drawable/filter_sort"
-            android:layout_width="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/top_bar_extended_discover_filter"
+            app:layout_constraintEnd_toStartOf="@+id/top_bar_extended_discover_filter"
+            app:layout_constraintTop_toTopOf="@+id/top_bar_extended_discover_filter" />
+
+    <EditText
+            android:id="@+id/top_bar_extended_discover_inputPrefix"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:textSize="14sp"
+            android:hint="@string/search_enter_prefix_hint"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_gray"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/top_bar_extended_discover_filter"/>
+            app:layout_constraintStart_toEndOf="@+id/top_bar_extended_discover_type_spinner"
+            app:layout_constraintEnd_toStartOf="@+id/top_bar_extended_discover_search"/>
 
-    <CheckBox
-            android:id="@+id/top_bar_extended_discover_adult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="18+"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/top_bar_extended_discover_search"/>
-
-    <TextView
+    <ImageView
             android:id="@+id/top_bar_extended_discover_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/search"
-            android:textColor="@color/header_text"
+            android:padding="10dp"
+            android:src="@drawable/search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@+id/top_bar_extended_discover_sort"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

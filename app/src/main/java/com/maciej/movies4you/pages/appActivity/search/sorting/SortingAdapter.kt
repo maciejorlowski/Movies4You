@@ -35,9 +35,7 @@ class SortingAdapter(private val selectedListener: SelectedListener) :
         }
         holder.item.text = context.getString(item.resNameId)
         holder.item.setOnClickListener {
-            if (item != currentCheckedItem) {
                 selectedListener(item)
-            }
         }
     }
 

@@ -16,6 +16,9 @@ import com.inverce.mod.v2.core.verification.isNotNullOrEmpty
 import com.maciej.movies4you.R
 import com.maciej.movies4you.base.BaseAppDialog
 import com.maciej.movies4you.functional.applyArguments
+import com.maciej.movies4you.functional.data.SharedPrefs
+import com.maciej.movies4you.functional.rxbus.RxBus
+import com.maciej.movies4you.functional.rxbus.RxEvent
 import com.maciej.movies4you.functional.viewModel
 import kotlinx.android.synthetic.main.dialog_add_movie_to_list.*
 import kotlinx.android.synthetic.main.entry_fragment_login.*
@@ -32,11 +35,15 @@ class AddMovieToListDialog : BaseAppDialog() {
         private const val MOVIE_ID = "movieId"
         private const val ANIM_DURATION = 300L
 
-
-        fun newInstance(movieId: Int) =
-            AddMovieToListDialog().applyArguments {
-                putInt(MOVIE_ID, movieId)
-            }.show()
+        fun newInstance(movieId: Int) {
+            if (SharedPrefs.getTmdbUserLogged()) {
+                AddMovieToListDialog().applyArguments {
+                    putInt(MOVIE_ID, movieId)
+                }.show()
+            } else {
+                RxBus.publish(RxEvent.EventRequestNoPermission())
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,9 +112,10 @@ class AddMovieToListDialog : BaseAppDialog() {
         }
 
         listClickedListener = {
-            viewModel.addMovieToList(it, arguments?.getInt(MOVIE_ID) ?: 0){success ->
-                if(success){
-                    Toast.makeText(context,R.string.tast_add_movie_to_list,Toast.LENGTH_SHORT).show()
+            viewModel.addMovieToList(it, arguments?.getInt(MOVIE_ID) ?: 0) { success ->
+                if (success) {
+                    Toast.makeText(context, R.string.tast_add_movie_to_list, Toast.LENGTH_SHORT)
+                        .show()
                     dismiss()
                 }
             }

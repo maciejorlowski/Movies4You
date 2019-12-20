@@ -69,6 +69,8 @@
     <string name="delete_movie_from_list_title">Delete the movie from the list?</string>
     <string name="delete_movie_from_list_description">Are you sure you want to remove this video from the list?</string>
 
+    <!--    FILTER-->
+    <string name="search_enter_prefix_hint">Enter the search phrase</string>
 
     <!--    SORTING DIALOG-->
     <string name="dial_confirm_positive_btn">Submit</string>

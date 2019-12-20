@@ -78,7 +78,8 @@
     <string name="dial_confirm_negative_btn">Odrzuć</string>
     <string name="label_discover_movies">Odkryj filmy</string>
 
-    <!--DISCOVER-->
+    <!--SEARCH-->
+    <string name="search_enter_prefix_hint">Wpisz wyszukiwaną frazę</string>
 
 
     <!--    SORTING DIALOG-->

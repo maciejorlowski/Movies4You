@@ -27,9 +27,10 @@ enum class MediaType(var type: String, var position: Int) {
 }
 
 enum class SearchSortType(
-    var queryName: String?, @StringRes var resNameId: Int,
-    var order: SearchOrderType?
+    var queryValue: String, @StringRes var resNameId: Int,
+    var order: SearchOrderType?, var queryName: String = queryValue + order?.queryPrefix
 ) {
+
     POPULARITY("popularity", R.string.discover_sort_popularity, SearchOrderType.DESC),
     RELEASE_DATE("release_date", R.string.discover_sort_release_date, SearchOrderType.DESC),
     REVENUE("revenue.desc", R.string.discover_sort_revenue, SearchOrderType.DESC),

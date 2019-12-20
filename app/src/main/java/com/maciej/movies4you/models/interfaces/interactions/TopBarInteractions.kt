@@ -1,6 +1,6 @@
 package com.maciej.movies4you.models.interfaces.interactions
 
-import com.maciej.movies4you.models.custom.DiscoverQueryData
+import com.maciej.movies4you.models.custom.search.DiscoverQueryData
 
 interface TopBarInteractions {
 

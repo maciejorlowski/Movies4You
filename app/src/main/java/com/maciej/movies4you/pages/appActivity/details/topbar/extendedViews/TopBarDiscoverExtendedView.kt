@@ -10,7 +10,7 @@ import com.inverce.mod.v2.core.IMEx
 import com.maciej.movies4you.functional.data.MediaType
 import com.maciej.movies4you.functional.rxbus.RxBus
 import com.maciej.movies4you.functional.rxbus.RxEvent
-import com.maciej.movies4you.models.custom.DiscoverQueryData
+import com.maciej.movies4you.models.custom.search.DiscoverQueryData
 import com.maciej.movies4you.pages.appActivity.search.sorting.SortingDialog
 import kotlinx.android.synthetic.main.view_topbar_extended_discover.view.*
 import com.maciej.movies4you.R
@@ -31,24 +31,33 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
         prepareViews()
     }
 
-    private fun prepareViews(){
-        top_bar_extended_discover_adult.isChecked = discoverQueryData.includeAdult ?: false
-        top_bar_extended_discover_type_spinner.setSelection(discoverQueryData.discoverType.position)
+    private fun prepareViews() {
+        top_bar_extended_discover_type_spinner.setSelection(discoverQueryData.filterData.discoverType.position)
     }
 
     private fun setupSpinner() {
         top_bar_extended_discover_type_spinner.adapter =
-            ArrayAdapter<MediaType>(IMEx.context, R.layout.spinner_language_item, MediaType.values())
+            ArrayAdapter<MediaType>(
+                IMEx.context,
+                R.layout.spinner_language_item,
+                MediaType.values()
+            )
 
-        top_bar_extended_discover_type_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                //Ignore
-            }
+        top_bar_extended_discover_type_spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    //Ignore
+                }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                //TODO on Item selected
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    //TODO on Item selected
+                }
             }
-        }
     }
 
     private fun setupListeners() {
@@ -57,13 +66,13 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
         }
 
         top_bar_extended_discover_filter.setOnClickListener {
-            FilterDialog.newInstance(discoverQueryData)
+            FilterDialog.newInstance(discoverQueryData.filterData)
         }
 
         top_bar_extended_discover_search.setOnClickListener {
-            discoverQueryData.discoverType = top_bar_extended_discover_type_spinner.selectedItem as MediaType
-            discoverQueryData.includeAdult = top_bar_extended_discover_adult.isChecked
-            RxBus.publish(RxEvent.EventDiscoverMovies(discoverQueryData))
+            if (top_bar_extended_discover_inputPrefix.text.toString().length > 2) {
+                RxBus.publish(RxEvent.EventSearchMoviesPrefix(top_bar_extended_discover_inputPrefix.text.toString()))
+            }
         }
     }
 }

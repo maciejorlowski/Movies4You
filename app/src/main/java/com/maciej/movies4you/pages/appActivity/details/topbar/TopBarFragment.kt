@@ -8,7 +8,7 @@ import com.maciej.movies4you.R
 import com.maciej.movies4you.functional.data.SharedPrefs
 import com.maciej.movies4you.base.BaseAppFragment
 import com.maciej.movies4you.functional.database.MyDatabase
-import com.maciej.movies4you.models.custom.DiscoverQueryData
+import com.maciej.movies4you.models.custom.search.DiscoverQueryData
 import com.maciej.movies4you.models.interfaces.interactions.TopBarInteractions
 import kotlinx.android.synthetic.main.view_topbar.*
 

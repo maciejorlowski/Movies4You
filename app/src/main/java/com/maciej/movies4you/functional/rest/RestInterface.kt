@@ -75,17 +75,9 @@ interface RestInterface {
     @GET("discover/{type}")
     fun discoverMovies(
         @Path("type") type: String,
-        @Query("api_key") apiKey: String,
-        @Query("language") language: String,
-        @Query("page") page: Int?,
-        @Query("sort_by") sortBy: String?,
-        @Query("include_adult") includeAdult: Boolean?,
-        @Query("release_date.gte") minReleaseDate: String?,
-        @Query("release_date.lte") maxReleaseDate: String?,
-        @Query("vote_count.gte") minVoteCount: Int?,
-        @Query("vote_count.lte") maxVoteCount: Int?,
-        @Query("vote_average_gte") maxVoteAverage: Int?,
-        @Query("vote_average_lte") minVoteAverage: Int?
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+        @Query("language") language: String = SharedPrefs.getLanguageCode(),
+        @QueryMap options: Map<String, String>
     ): Observable<MoviesResponse>
 
     //----------------------------------LISTS---------------------------------------------------------

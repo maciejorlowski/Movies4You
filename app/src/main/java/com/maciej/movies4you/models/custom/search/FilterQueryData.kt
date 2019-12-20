@@ -1,11 +1,9 @@
-package com.maciej.movies4you.models.custom
+package com.maciej.movies4you.models.custom.search
 
-import com.maciej.movies4you.functional.data.SearchSortType
 import com.maciej.movies4you.functional.data.MediaType
 
-class DiscoverQueryData(
+class FilterQueryData (
 
-    var sortType: SearchSortType = SearchSortType.POPULARITY,
     var includeAdult: Boolean? = null,
     var minReleaseYear: String? = null,
     var maxReleaseYear: String? = null,
@@ -14,5 +12,4 @@ class DiscoverQueryData(
     var minVoteAverage: Int? = null,
     var maxVoteAverage: Int? = null,
     var discoverType: MediaType = MediaType.Movie
-
 )

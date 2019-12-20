@@ -6,11 +6,17 @@ import com.maciej.movies4you.base.BaseViewModel
 import com.maciej.movies4you.functional.data.Constants
 import com.maciej.movies4you.functional.data.SharedPrefs
 import com.maciej.movies4you.functional.rest.RestInterface
-import com.maciej.movies4you.models.custom.DiscoverQueryData
+import com.maciej.movies4you.models.custom.search.DiscoverQueryData
 import com.maciej.movies4you.models.movies.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.HttpUrl
+import retrofit2.http.Query
 import javax.inject.Inject
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.inverce.mod.v2.core.verification.isNotNullOrEmpty
+import com.maciej.movies4you.functional.data.MediaType
+
 
 class SearchViewModel : BaseViewModel() {
 
@@ -18,7 +24,8 @@ class SearchViewModel : BaseViewModel() {
 
     var pageNr: Int = 0
 
-    var searchQueryData: DiscoverQueryData = DiscoverQueryData()
+    var searchQueryData: DiscoverQueryData =
+        DiscoverQueryData()
 
     val observableMovies: LiveData<MutableList<Movie>>
         get() = movies
@@ -32,18 +39,10 @@ class SearchViewModel : BaseViewModel() {
     }
 
     fun loadNextMovies() {
+        val queryData = queryData()
         subscription.add(restInterface.discoverMovies(
-            searchQueryData.discoverType.type,
-            Constants.API_KEY, SharedPrefs.getLanguageCode(),
-            ++pageNr,
-            searchQueryData.sortType.queryName + searchQueryData.sortType.order?.queryPrefix,
-            searchQueryData.includeAdult,
-            searchQueryData.minReleaseYear,
-            searchQueryData.maxReleaseYear,
-            searchQueryData.minVoteCount,
-            searchQueryData.maxVoteCount,
-            searchQueryData.minVoteAverage,
-            searchQueryData.maxVoteAverage
+            type = searchQueryData.filterData.discoverType.type,
+            options = queryData
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -58,6 +57,32 @@ class SearchViewModel : BaseViewModel() {
                     onRequestError(error)
                 }
             ))
+    }
+//    @Query("page") page: Int?,
+//    @Query("sort_by") sortBy: String?,
+//    @Query("with_keywords") searchPrefix: String?,
+//    @Query("include_adult") includeAdult: Boolean?,
+//    @Query("release_date.gte") minReleaseDate: String?,
+//    @Query("release_date.lte") maxReleaseDate: String?,
+//    @Query("vote_count.gte") minVoteCount: Int?,
+//    @Query("vote_count.lte") maxVoteCount: Int?,
+//    @Query("vote_average_gte") maxVoteAverage: Int?,
+//    @Query("vote_average_lte") minVoteAverage: Int?
+
+    private fun queryData(): HashMap<String, String> {
+        val data = HashMap<String, String>()
+        data["page"] = (++pageNr).toString()
+        data["sort_by"] = searchQueryData.sortType.queryName
+        if (searchQueryData.filterData.minReleaseYear.isNotNullOrEmpty()) {
+            data["release_date.gte"] = searchQueryData.filterData.minReleaseYear ?: ""
+        }
+        if (searchQueryData.filterData.maxReleaseYear.isNotNullOrEmpty()) {
+            data["release_date.lte"] = searchQueryData.filterData.maxReleaseYear ?: ""
+        }
+        if (searchQueryData.searchPrefix.isNotNullOrEmpty()) {
+            data["with_keywords"] = searchQueryData.searchPrefix
+        }
+        return data
     }
 
     fun changeSearchCriteria(newQueryData: DiscoverQueryData) {
