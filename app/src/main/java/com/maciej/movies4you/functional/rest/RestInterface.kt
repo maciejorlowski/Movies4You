@@ -4,6 +4,7 @@ import com.maciej.movies4you.functional.data.Constants
 import com.maciej.movies4you.functional.data.SharedPrefs
 import com.maciej.movies4you.models.body.*
 import com.maciej.movies4you.models.db.UserDetails
+import com.maciej.movies4you.models.movies.Category
 import com.maciej.movies4you.models.movies.MovieDetails
 import com.maciej.movies4you.models.responses.*
 import io.reactivex.Observable
@@ -80,6 +81,9 @@ interface RestInterface {
         @QueryMap options: Map<String, String>
     ): Observable<MoviesResponse>
 
+    @GET("genre/movie/list")
+    fun getMovieCategories(@Query("api_key") apiKey: String = Constants.API_KEY, @Query("language") language: String = SharedPrefs.getLanguageCode()): Observable<CategoriesResponse>
+
     //----------------------------------LISTS---------------------------------------------------------
 
     @GET("account/{account_id}/lists")
@@ -94,7 +98,11 @@ interface RestInterface {
     fun createNewList(@Query("api_key") apiKey: String, @Query("session_id") sessionId: String, @Body listBody: ListBody): Observable<CreatelistResponse>
 
     @DELETE("list/{list_id}")
-    fun deleteList(@Path("list_id") listId: String, @Query("api_key") apiKey: String = Constants.API_KEY, @Query("session_id") sessionId: String = SharedPrefs.getSessionId()): Observable<SimpleResponse>
+    fun deleteList(
+        @Path("list_id") listId: String, @Query("api_key") apiKey: String = Constants.API_KEY, @Query(
+            "session_id"
+        ) sessionId: String = SharedPrefs.getSessionId()
+    ): Observable<SimpleResponse>
 
     @POST("list/{list_id}/clear")
     fun clearList(

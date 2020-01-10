@@ -79,8 +79,15 @@ class SearchViewModel : BaseViewModel() {
         if (searchQueryData.filterData.maxReleaseYear.isNotNullOrEmpty()) {
             data["release_date.lte"] = searchQueryData.filterData.maxReleaseYear ?: ""
         }
+        if (searchQueryData.filterData.minVoteCount != null) {
+            data["vote_count.gte"] = searchQueryData.filterData.minVoteCount.toString()
+        }
         if (searchQueryData.searchPrefix.isNotNullOrEmpty()) {
             data["with_keywords"] = searchQueryData.searchPrefix
+        }
+        if (searchQueryData.filterData.categories.isNotNullOrEmpty()) {
+            data["with_genres"] =
+                searchQueryData.filterData.categories?.joinToString(",") { it.id.toString() } ?: ""
         }
         return data
     }

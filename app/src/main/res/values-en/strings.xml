@@ -3,6 +3,8 @@
 
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
+    <string name="show">Show</string>
+
 
     <!--LABELS-->
     <string name="label_home">Home</string>
@@ -88,6 +90,9 @@
     <string name="order_asc">ascending</string>
     <string name="order_desc">descending</string>
 
+    <!--    FILTER DIALOG-->
+    <string name="search_filter_dialog_min_year">min year</string>
+
     <!--    PERMISSION DIALOG-->
     <string name="permission_dialog_action_text">Login as TMDB user.</string>
     <string name="permission_dialog_description">You do not have permission to perform this action.</string>
@@ -98,4 +103,9 @@
         <item>Actors</item>
         <item>Reviews</item>
     </string-array>
+    <string name="search_filter_dialog_popularity_type">popularity</string>
+    <string name="popularity_high">High</string>
+    <string name="popularity_low">Low</string>
+    <string name="popularity_medium">Medium</string>
+    <string name="search_filter_dialog_max_year">max year</string>
 </resources>

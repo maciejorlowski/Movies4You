@@ -4,7 +4,7 @@ import com.maciej.movies4you.functional.data.SearchSortType
 
 class DiscoverQueryData(
 
-    var searchPrefix: String? = "",
+    var searchPrefix: String = "",
     var sortType: SearchSortType = SearchSortType.POPULARITY,
     var filterData: FilterQueryData = FilterQueryData()
 

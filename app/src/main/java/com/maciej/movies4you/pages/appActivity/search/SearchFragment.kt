@@ -107,9 +107,16 @@ class SearchFragment : BaseAppFragment() {
             actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
         })
 
+        rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesFilter::class.java).subscribe {
+            viewModel.changeSearchCriteria(viewModel.searchQueryData.apply {
+                filterData = it.filterData
+            })
+            actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
+        })
+
         rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesPrefix::class.java).subscribe {
             viewModel.changeSearchCriteria(viewModel.searchQueryData.apply {
-                searchPrefix = it.prefix
+                searchPrefix = it.prefix ?: ""
             })
             actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
         })

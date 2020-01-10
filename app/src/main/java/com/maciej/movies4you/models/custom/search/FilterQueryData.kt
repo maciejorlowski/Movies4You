@@ -1,6 +1,7 @@
 package com.maciej.movies4you.models.custom.search
 
 import com.maciej.movies4you.functional.data.MediaType
+import com.maciej.movies4you.models.movies.Category
 
 class FilterQueryData (
 
@@ -11,5 +12,6 @@ class FilterQueryData (
     var maxVoteCount: Int? = null,
     var minVoteAverage: Int? = null,
     var maxVoteAverage: Int? = null,
+    var categories: List<Category>? = null,
     var discoverType: MediaType = MediaType.Movie
 )

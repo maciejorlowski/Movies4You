@@ -11,25 +11,23 @@ import com.maciej.movies4you.pages.appActivity.movieDetails.detailsReviews.Movie
 import com.maciej.movies4you.pages.entryActivity.login.LoginViewModel
 import com.maciej.movies4you.pages.appActivity.myLists.myLists.MyListsViewModel
 import com.maciej.movies4you.pages.appActivity.myLists.singleList.MySingleListViewModel
+import com.maciej.movies4you.pages.appActivity.search.filter.FilterViewModel
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [(Rest::class)])
 interface ViewModelInjector {
-    /**
-     * Injects required dependencies into the specified PostListViewModel.
-     * @param postListViewModel PostListViewModel in which to inject the dependencies
-     */
-    fun injectLogin(loginViewModel: LoginViewModel)
 
+    fun injectLogin(loginViewModel: LoginViewModel)
     fun injectHome(homeViewModel: HomeViewModel)
     fun injectMovieDetails(movieDetailsViewModel: MovieDetailsViewModel)
     fun injectMyLists(myListsViewModel: MyListsViewModel)
     fun injectMySingleList(mysingleList: MySingleListViewModel)
     fun injectDiscover(discoverViewModel: SearchViewModel)
-    fun injectmovieDetailsActors(movieDetailsActorsViewModel: MovieDetailsActorsViewModel)
-    fun injectmovieDetailsReviews(movieDetailsReviewsViewModel: MovieDetailsReviewsViewModel)
-    fun addMovieToList(addMovieToListViewModel: AddMovieToListViewModel)
+    fun injectMovieDetailsActors(movieDetailsActorsViewModel: MovieDetailsActorsViewModel)
+    fun injectMovieDetailsReviews(movieDetailsReviewsViewModel: MovieDetailsReviewsViewModel)
+    fun injectAddMovieToList(addMovieToListViewModel: AddMovieToListViewModel)
+    fun injectFilter(filterViewModel: FilterViewModel)
 
 
     @Component.Builder

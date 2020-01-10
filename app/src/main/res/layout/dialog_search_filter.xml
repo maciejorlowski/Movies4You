@@ -16,78 +16,120 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.drawerlayout.widget.DrawerLayout
-                android:id="@+id/dial_search_filter_drawer"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="35dp"
-                android:layout_marginTop="80dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+    <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/dial_search_filter_drawer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dial_search_filter_contentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:layout_marginEnd="-65dp"
-            android:background="@drawable/bg"
-            android:padding="20dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dial_search_filter_contentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginEnd="-65dp"
+                android:background="@drawable/bg"
+                android:padding="20dp">
 
-        <TextView
-                android:id="@+id/dial_search_filter_minYearLabel"
-                style="@style/App.TextView.Medium.14.White"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="minYear"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                    android:id="@+id/dial_search_filter_minYearLabel"
+                    style="@style/App.TextView.Medium.14.White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_filter_dialog_min_year"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-                android:id="@+id/dial_search_filter_minYearSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:background="@android:color/transparent"
-                android:popupBackground="@color/light_gray"
-                app:layout_constraintStart_toStartOf="@+id/dial_search_filter_minYearLabel"
-                app:layout_constraintTop_toBottomOf="@+id/dial_search_filter_minYearLabel"
-                tools:listitem="dadadsa" />
+            <Spinner
+                    android:id="@+id/dial_search_filter_minYearSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:color/transparent"
+                    android:popupBackground="@color/light_gray"
+                    app:layout_constraintStart_toStartOf="@+id/dial_search_filter_minYearLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/dial_search_filter_minYearLabel"
+                    tools:listitem="@layout/spinner_language_item" />
 
-        <TextView
-                android:id="@+id/dial_search_filter_maxYearLabel"
-                style="@style/App.TextView.Medium.14.White"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="maxYear"
-                app:layout_constraintBottom_toBottomOf="@+id/dial_search_filter_minYearLabel"
-                app:layout_constraintStart_toStartOf="@+id/dial_search_filter_maxYearSpinner" />
+            <TextView
+                    android:id="@+id/dial_search_filter_maxYearLabel"
+                    style="@style/App.TextView.Medium.14.White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/search_filter_dialog_max_year"
+                    app:layout_constraintBottom_toBottomOf="@+id/dial_search_filter_minYearLabel"
+                    app:layout_constraintStart_toEndOf="@+id/dial_search_filter_minYearLabel" />
 
-        <Spinner
-                android:id="@+id/dial_search_filter_maxYearSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:background="@android:color/transparent"
-                android:popupBackground="@color/light_gray"
-                app:layout_constraintBottom_toBottomOf="@+id/dial_search_filter_minYearSpinner"
-                app:layout_constraintStart_toEndOf="@+id/dial_search_filter_minYearSpinner"
-                tools:listitem="dadadsa" />
+            <Spinner
+                    android:id="@+id/dial_search_filter_maxYearSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:popupBackground="@color/light_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/dial_search_filter_minYearSpinner"
+                    app:layout_constraintStart_toStartOf="@+id/dial_search_filter_maxYearLabel"
+                    tools:listitem="@layout/spinner_language_item" />
 
-        <Button
-                android:id="@+id/dial_search_filter_showBtn"
-                style="@style/button_open"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Pokaż"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                    android:id="@+id/dial_search_filter_popularityType"
+                    style="@style/App.TextView.Medium.14.White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/discover_sort_popularity"
+                    app:layout_constraintBottom_toBottomOf="@+id/dial_search_filter_minYearLabel"
+                    app:layout_constraintStart_toEndOf="@+id/dial_search_filter_maxYearLabel" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Spinner
+                    android:id="@+id/dial_search_filter_popularityTypeSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:popupBackground="@color/light_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/dial_search_filter_minYearSpinner"
+                    app:layout_constraintStart_toStartOf="@+id/dial_search_filter_popularityType"
+                    tools:listitem="@layout/spinner_language_item" />
 
-        </androidx.drawerlayout.widget.DrawerLayout>
+            <Button
+                    android:id="@+id/dial_search_filter_showBtn"
+                    style="@style/button_open"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dial_search_filter_categoriesAdapter"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/dial_search_filter_showBtn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dial_search_filter_popularityTypeSpinner">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <ProgressBar
+                    android:id="@+id/dial_search_filter_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/dial_search_filter_showBtn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/dial_search_filter_categoriesAdapter" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

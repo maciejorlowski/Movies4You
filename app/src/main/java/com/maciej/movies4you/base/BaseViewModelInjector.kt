@@ -10,6 +10,7 @@ import com.maciej.movies4you.pages.appActivity.movieDetails.detailsActors.MovieD
 import com.maciej.movies4you.pages.appActivity.movieDetails.detailsReviews.MovieDetailsReviewsViewModel
 import com.maciej.movies4you.pages.appActivity.myLists.myLists.MyListsViewModel
 import com.maciej.movies4you.pages.appActivity.myLists.singleList.MySingleListViewModel
+import com.maciej.movies4you.pages.appActivity.search.filter.FilterViewModel
 import com.maciej.movies4you.pages.entryActivity.login.LoginViewModel
 
 abstract class BaseViewModelInjector : ViewModel() {
@@ -34,9 +35,10 @@ abstract class BaseViewModelInjector : ViewModel() {
             is MyListsViewModel -> injector.injectMyLists(this)
             is MySingleListViewModel -> injector.injectMySingleList(this)
             is SearchViewModel -> injector.injectDiscover(this)
-            is MovieDetailsActorsViewModel -> injector.injectmovieDetailsActors(this)
-            is MovieDetailsReviewsViewModel -> injector.injectmovieDetailsReviews(this)
-            is AddMovieToListViewModel -> injector.addMovieToList(this)
+            is MovieDetailsActorsViewModel -> injector.injectMovieDetailsActors(this)
+            is MovieDetailsReviewsViewModel -> injector.injectMovieDetailsReviews(this)
+            is AddMovieToListViewModel -> injector.injectAddMovieToList(this)
+            is FilterViewModel -> injector.injectFilter(this)
         }
     }
 }

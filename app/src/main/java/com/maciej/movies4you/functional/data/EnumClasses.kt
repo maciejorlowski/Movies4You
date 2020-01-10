@@ -43,3 +43,9 @@ enum class SearchOrderType(var queryPrefix: String) {
     ASC(".asc"),
     DESC(".desc")
 }
+
+enum class FilterPopularityCount(var position: Int, @StringRes var resNameId: Int, var voteCount : Int){
+    LOW(0,R.string.popularity_low, 0),
+    MEDIUM(1,R.string.popularity_medium, 5000),
+    HIGH(2,R.string.popularity_high, 10000)
+}

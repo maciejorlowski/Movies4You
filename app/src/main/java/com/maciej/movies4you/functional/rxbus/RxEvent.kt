@@ -11,6 +11,6 @@ class RxEvent {
     class EventCloseAddToMoviesView
 
     class EventSearchMoviesSort(val sortType: SearchSortType)
-    class EventSearchMoviesFilter(val filterData: FilterQueryData?)
+    class EventSearchMoviesFilter(val filterData: FilterQueryData)
     class EventSearchMoviesPrefix(val prefix: String?)
 }

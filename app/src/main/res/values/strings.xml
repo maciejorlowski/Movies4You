@@ -5,6 +5,8 @@
     <string name="accept">Zatwierdź</string>
     <string name="close">Zamknij</string>
     <string name="search">Szukaj</string>
+    <string name="show">Pokaż</string>
+
 
 
     <!--LABELS-->
@@ -93,6 +95,15 @@
     <string name="discover_sort_vote_count">Ilość ocen</string>
     <string name="order_asc">rosnąco</string>
     <string name="order_desc">malejąco</string>
+
+
+    <!--    FILTER DIALOG-->
+    <string name="search_filter_dialog_popularity_type">popularność</string>
+    <string name="search_filter_dialog_min_year">od roku</string>
+    <string name="search_filter_dialog_max_year">do roku</string>
+    <string name="popularity_low">Niska</string>
+    <string name="popularity_medium">Średnia</string>
+    <string name="popularity_high">Wysoka</string>
 
     <string-array name="movie_details_tab_layout_names">
         <item>Opis</item>
