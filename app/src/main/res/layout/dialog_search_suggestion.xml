@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_dialog_rounded">
 
-</LinearLayout>
+    <TextView
+            android:id="@+id/dial_search_suggestion_headerLabel"
+            style="@style/App.TextView.Medium.20.White"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/search_suggesstion_dialog_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+            android:id="@+id/dial_search_suggestion_close"
+            style="@style/App.TextView.Medium.20.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/close"
+            android:text="@string/search_suggesstion_dialog_label"
+            app:layout_constraintBottom_toBottomOf="@+id/dial_search_suggestion_headerLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/dial_search_suggestion_headerLabel" />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dial_search_suggestion_adapter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dial_search_suggestion_headerLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

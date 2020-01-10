@@ -82,6 +82,8 @@
 
     <!--SEARCH-->
     <string name="search_enter_prefix_hint">Wpisz wyszukiwaną frazę</string>
+    <string name="search_suggesstion_dialog_label">Wybierz wyszukaną frazę</string>
+
 
 
     <!--    SORTING DIALOG-->

@@ -20,6 +20,7 @@ import com.maciej.movies4you.functional.rxbus.RxEvent
 import com.maciej.movies4you.functional.viewModel
 import com.maciej.movies4you.models.custom.search.DiscoverQueryData
 import com.maciej.movies4you.pages.appActivity.movieDetails.addMovieToList.AddMovieToListDialog
+import com.maciej.movies4you.pages.appActivity.search.suggestions.SearchSuggestionDialog
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.app_fragment_discover.*
 
@@ -115,10 +116,11 @@ class SearchFragment : BaseAppFragment() {
         })
 
         rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesPrefix::class.java).subscribe {
-            viewModel.changeSearchCriteriaWithNewKeywords(viewModel.searchQueryData.apply {
-                searchPrefix = it.prefix ?: ""
-            })
-            actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
+            SearchSuggestionDialog.newInstance(it.prefix ?: "")
+//            viewModel.changeSearchCriteriaWithNewKeywords(viewModel.searchQueryData.apply {
+//                searchPrefix = it.prefix ?: ""
+//            })
+//            actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
         })
     }
 
