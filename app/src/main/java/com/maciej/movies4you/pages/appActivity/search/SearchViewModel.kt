@@ -115,6 +115,7 @@ class SearchViewModel : BaseViewModel() {
         this.searchQueryData = newQueryData
         pageNr = 0
         movies.value?.clear()
+        loadSearchKeywords()
     }
 
     fun changeSearchCriteria(newQueryData: DiscoverQueryData) {
