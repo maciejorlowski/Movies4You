@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maciej.movies4you.R
 import com.maciej.movies4you.models.movies.Category
 
-class CategoriesAdapter(var selectedItems: MutableList<Category>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+class CategoriesAdapter(var selectedItems: MutableList<Category>) :
+    RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
     var listItems: List<Category> = emptyList()
 
@@ -22,7 +23,7 @@ class CategoriesAdapter(var selectedItems: MutableList<Category>) : RecyclerView
         val item = listItems[position]
 
         holder.view.text = item.name
-        holder.view.isSelected = selectedItems.contains(item)
+        holder.view.isChecked = selectedItems.map { it.id }.contains(item.id)
         holder.view.setOnCheckedChangeListener { _, isChecked ->
             when (isChecked) {
                 true -> selectedItems.add(item)

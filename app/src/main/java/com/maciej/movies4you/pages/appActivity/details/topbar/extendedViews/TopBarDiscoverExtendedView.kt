@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import com.inverce.mod.v2.core.IMEx
+import com.inverce.mod.v2.core.utils.hideSoftInput
 import com.maciej.movies4you.functional.data.MediaType
 import com.maciej.movies4you.functional.rxbus.RxBus
 import com.maciej.movies4you.functional.rxbus.RxEvent
@@ -72,6 +73,7 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
         top_bar_extended_discover_search.setOnClickListener {
             if (top_bar_extended_discover_inputPrefix.text.toString().length > 2) {
                 RxBus.publish(RxEvent.EventSearchMoviesPrefix(top_bar_extended_discover_inputPrefix.text.toString()))
+                hideSoftInput()
             }
         }
     }

@@ -58,6 +58,25 @@ class SearchViewModel : BaseViewModel() {
                 }
             ))
     }
+
+    fun loadSearchKeywords() {
+        subscription.add(restInterface.getSearchKeywords(
+            keyword = searchQueryData.searchPrefix
+        )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe { onRequestStart() }
+            .doOnTerminate { onRequestExecute() }
+            .subscribe(
+                { it ->
+                    searchQueryData.keywordsIds = it.keywords.map { it.id }.toSet()
+                    loadNextMovies()
+                },
+                { error ->
+                    onRequestError(error)
+                }
+            ))
+    }
 //    @Query("page") page: Int?,
 //    @Query("sort_by") sortBy: String?,
 //    @Query("with_keywords") searchPrefix: String?,
@@ -83,13 +102,19 @@ class SearchViewModel : BaseViewModel() {
             data["vote_count.gte"] = searchQueryData.filterData.minVoteCount.toString()
         }
         if (searchQueryData.searchPrefix.isNotNullOrEmpty()) {
-            data["with_keywords"] = searchQueryData.searchPrefix
+            data["with_keywords"] = searchQueryData.keywordsIds.joinToString(",")
         }
         if (searchQueryData.filterData.categories.isNotNullOrEmpty()) {
             data["with_genres"] =
                 searchQueryData.filterData.categories?.joinToString(",") { it.id.toString() } ?: ""
         }
         return data
+    }
+
+    fun changeSearchCriteriaWithNewKeywords(newQueryData: DiscoverQueryData) {
+        this.searchQueryData = newQueryData
+        pageNr = 0
+        movies.value?.clear()
     }
 
     fun changeSearchCriteria(newQueryData: DiscoverQueryData) {

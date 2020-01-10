@@ -84,6 +84,8 @@ interface RestInterface {
     @GET("genre/movie/list")
     fun getMovieCategories(@Query("api_key") apiKey: String = Constants.API_KEY, @Query("language") language: String = SharedPrefs.getLanguageCode()): Observable<CategoriesResponse>
 
+    @GET("search/keyword")
+    fun getSearchKeywords(@Query("api_key") apiKey: String = Constants.API_KEY, @Query("keyword") keyword: String) : Observable<KeywordsResponse>
     //----------------------------------LISTS---------------------------------------------------------
 
     @GET("account/{account_id}/lists")

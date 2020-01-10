@@ -35,7 +35,6 @@ class FilterDialog : BaseAppDialog() {
         }.show()
     }
 
-    //    private val selectedListener: SelectedListener = this::onSortTypeSelected
     private lateinit var currentFilters: FilterQueryData
     private lateinit var categoriesAdapter: CategoriesAdapter
     private val viewModel by viewModel<FilterViewModel>()
@@ -64,7 +63,6 @@ class FilterDialog : BaseAppDialog() {
         setupAdapter()
         setupSpinners()
         setupListeners()
-        prepareViews()
 
         onUi(100) {
             showAnimShadowOn()
@@ -72,12 +70,9 @@ class FilterDialog : BaseAppDialog() {
         }
     }
 
-    private fun prepareViews(){
-
-    }
-
     private fun setupAdapter() {
-        categoriesAdapter = CategoriesAdapter(currentFilters.categories?.toMutableList() ?: mutableListOf())
+        categoriesAdapter =
+            CategoriesAdapter(currentFilters.categories?.toMutableList() ?: mutableListOf())
         dial_search_filter_categoriesAdapter.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = categoriesAdapter
@@ -92,7 +87,11 @@ class FilterDialog : BaseAppDialog() {
                 R.layout.spinner_language_item,
                 FILTER_YEAR_RANGE
             )
-            setSelection(0, false)
+            setSelection(
+                currentFilters.minReleaseYear?.substring(0, 4)?.toInt()?.minus(FILTER_YEAR_RANGE[0])
+                    ?: 0,
+                false
+            )
         }
 
         dial_search_filter_maxYearSpinner.apply {
@@ -101,7 +100,11 @@ class FilterDialog : BaseAppDialog() {
                 R.layout.spinner_language_item,
                 FILTER_YEAR_RANGE
             )
-            setSelection(adapter.count - 1, false)
+            setSelection(
+                currentFilters.maxReleaseYear?.substring(0, 4)?.toInt()?.minus(FILTER_YEAR_RANGE[0])
+                    ?: adapter.count - 1,
+                false
+            )
         }
 
         dial_search_filter_popularityTypeSpinner.apply {
@@ -110,7 +113,10 @@ class FilterDialog : BaseAppDialog() {
                 R.layout.spinner_language_item,
                 FilterPopularityCount.values().map { getString(it.resNameId) }
             )
-            setSelection(0, false)
+            setSelection(
+                FilterPopularityCount.values().firstOrNull { it.voteCount == currentFilters.minVoteCount }?.position
+                    ?: 0, false
+            )
         }
 
         viewModel.observableCategories.observe(this, Observer {
@@ -176,8 +182,10 @@ class FilterDialog : BaseAppDialog() {
 
     private fun prepareFilterData() {
         currentFilters.apply {
-            minReleaseYear = dial_search_filter_minYearSpinner.selectedItem.toString() + RELEASE_DATE_REST
-            maxReleaseYear = dial_search_filter_maxYearSpinner.selectedItem.toString() + RELEASE_DATE_REST
+            minReleaseYear =
+                dial_search_filter_minYearSpinner.selectedItem.toString() + RELEASE_DATE_REST
+            maxReleaseYear =
+                dial_search_filter_maxYearSpinner.selectedItem.toString() + RELEASE_DATE_REST
             minVoteCount = FilterPopularityCount.values()
                 .first { it.position == dial_search_filter_popularityTypeSpinner.selectedItemPosition }
                 .voteCount

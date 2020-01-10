@@ -115,7 +115,7 @@ class SearchFragment : BaseAppFragment() {
         })
 
         rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesPrefix::class.java).subscribe {
-            viewModel.changeSearchCriteria(viewModel.searchQueryData.apply {
+            viewModel.changeSearchCriteriaWithNewKeywords(viewModel.searchQueryData.apply {
                 searchPrefix = it.prefix ?: ""
             })
             actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
