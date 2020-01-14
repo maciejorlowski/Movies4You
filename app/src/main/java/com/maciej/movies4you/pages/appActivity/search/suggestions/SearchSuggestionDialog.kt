@@ -4,15 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.maciej.movies4you.R
 import com.maciej.movies4you.base.BaseAppDialog
 import com.maciej.movies4you.functional.applyArguments
+import com.maciej.movies4you.functional.rxbus.RxEvent
+import com.maciej.movies4you.functional.viewModel
 import kotlinx.android.synthetic.main.dialog_search_suggestion.*
 
 class SearchSuggestionDialog : BaseAppDialog() {
 
     lateinit var keywordsAdapter: SearchSuggestionAdapter
+    private val keywordListener: KeywordListener = this::onKeywordSelected
+
+    private val viewModel by viewModel<SearchSuggestionViewModel>()
 
     companion object {
         const val KEYWORD = "KEYWORD"
@@ -20,7 +28,7 @@ class SearchSuggestionDialog : BaseAppDialog() {
         fun newInstance(keyword: String) =
             SearchSuggestionDialog().applyArguments {
                 putString(KEYWORD, keyword)
-            }.show()
+            }
     }
 
     override fun onCreateView(
@@ -28,6 +36,7 @@ class SearchSuggestionDialog : BaseAppDialog() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.initialize(arguments?.getString(KEYWORD) ?: "")
         return inflater.inflate(R.layout.dialog_search_suggestion, container, false)
     }
 
@@ -36,12 +45,10 @@ class SearchSuggestionDialog : BaseAppDialog() {
 
         setupAdapter()
         setupListeners()
-//        prepareViews()
-//        setOnClickListeners()
     }
 
-    private fun setupAdapter(){
-        keywordsAdapter = SearchSuggestionAdapter()
+    private fun setupAdapter() {
+        keywordsAdapter = SearchSuggestionAdapter(keywordListener)
         dial_search_suggestion_adapter.apply {
             adapter = keywordsAdapter
             layoutManager = LinearLayoutManager(this.context)
@@ -49,7 +56,35 @@ class SearchSuggestionDialog : BaseAppDialog() {
         }
     }
 
-    private fun setupListeners(){
+    private fun onKeywordSelected(id: Int) {
+        val listener: SuggestionDialogCallback = targetFragment as SuggestionDialogCallback
+        listener.onSuggestionDialogCallback(id)
+        dismiss()
+    }
 
+    private fun setupListeners() {
+
+        dial_search_suggestion_adapter.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1) && newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    viewModel.loadKeywords()
+                }
+            }
+        })
+
+        viewModel.observableKeywords.observe(this, Observer {
+            keywordsAdapter.updateData(it)
+        })
+
+        dial_search_suggestion_close.setOnClickListener {
+            dismiss()
+        }
+    }
+
+    interface SuggestionDialogCallback {
+        fun onSuggestionDialogCallback(keywordId: Int)
     }
 }

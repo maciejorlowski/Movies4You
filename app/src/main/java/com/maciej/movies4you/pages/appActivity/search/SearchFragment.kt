@@ -14,17 +14,19 @@ import com.inverce.mod.v2.core.IMEx
 import com.inverce.mod.v2.core.verification.isNotNullOrEmpty
 import com.maciej.movies4you.R
 import com.maciej.movies4you.base.BaseAppFragment
+import com.maciej.movies4you.functional.data.Constants
 import com.maciej.movies4you.functional.plusAssign
 import com.maciej.movies4you.functional.rxbus.RxBus
 import com.maciej.movies4you.functional.rxbus.RxEvent
 import com.maciej.movies4you.functional.viewModel
 import com.maciej.movies4you.models.custom.search.DiscoverQueryData
+import com.maciej.movies4you.pages.appActivity.details.dialogs.ConfirmDialog
 import com.maciej.movies4you.pages.appActivity.movieDetails.addMovieToList.AddMovieToListDialog
 import com.maciej.movies4you.pages.appActivity.search.suggestions.SearchSuggestionDialog
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.app_fragment_discover.*
 
-class SearchFragment : BaseAppFragment() {
+class SearchFragment : BaseAppFragment(), SearchSuggestionDialog.SuggestionDialogCallback {
 
     private val viewModel by viewModel<SearchViewModel>()
     private lateinit var discoverAdapter: DiscoverAdapter
@@ -115,12 +117,16 @@ class SearchFragment : BaseAppFragment() {
             actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
         })
 
-        rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesPrefix::class.java).subscribe {
-            SearchSuggestionDialog.newInstance(it.prefix ?: "")
-//            viewModel.changeSearchCriteriaWithNewKeywords(viewModel.searchQueryData.apply {
-//                searchPrefix = it.prefix ?: ""
-//            })
-//            actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
+        rxEventListener.plusAssign(RxBus.listen(RxEvent.EventSearchMoviesPrefix::class.java).subscribe { event ->
+            viewModel.checkNewPrefix(event.prefix ?: "") {
+                if (it) {
+                    val dialog = SearchSuggestionDialog.newInstance(
+                        event.prefix ?: ""
+                    )
+                    dialog.setTargetFragment(this@SearchFragment, Constants.DIALOG_CODE)
+                    dialog.show(requireFragmentManager(), "dialog")
+                }
+            }
         })
     }
 
@@ -147,5 +153,12 @@ class SearchFragment : BaseAppFragment() {
 
     private fun onAddClicked(movieId: Int) {
         AddMovieToListDialog.newInstance(movieId)
+    }
+
+    override fun onSuggestionDialogCallback(id: Int) {
+        viewModel.changeSearchCriteria(viewModel.searchQueryData.apply {
+            keywordId = id
+        })
+        actions?.topBar()?.updateSearchCriteria(viewModel.searchQueryData)
     }
 }

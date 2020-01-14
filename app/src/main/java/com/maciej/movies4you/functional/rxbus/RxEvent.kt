@@ -13,4 +13,5 @@ class RxEvent {
     class EventSearchMoviesSort(val sortType: SearchSortType)
     class EventSearchMoviesFilter(val filterData: FilterQueryData)
     class EventSearchMoviesPrefix(val prefix: String?)
+    class EventSearchMovieKeyword(val id: Int?)
 }

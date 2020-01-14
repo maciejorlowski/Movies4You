@@ -12,6 +12,7 @@ import com.maciej.movies4you.pages.entryActivity.login.LoginViewModel
 import com.maciej.movies4you.pages.appActivity.myLists.myLists.MyListsViewModel
 import com.maciej.movies4you.pages.appActivity.myLists.singleList.MySingleListViewModel
 import com.maciej.movies4you.pages.appActivity.search.filter.FilterViewModel
+import com.maciej.movies4you.pages.appActivity.search.suggestions.SearchSuggestionViewModel
 import javax.inject.Singleton
 
 @Singleton
@@ -28,6 +29,7 @@ interface ViewModelInjector {
     fun injectMovieDetailsReviews(movieDetailsReviewsViewModel: MovieDetailsReviewsViewModel)
     fun injectAddMovieToList(addMovieToListViewModel: AddMovieToListViewModel)
     fun injectFilter(filterViewModel: FilterViewModel)
+    fun searchSuggestion(searchSuggestionViewModel: SearchSuggestionViewModel)
 
 
     @Component.Builder

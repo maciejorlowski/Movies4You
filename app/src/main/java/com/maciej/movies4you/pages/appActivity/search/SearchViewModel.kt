@@ -3,19 +3,13 @@ package com.maciej.movies4you.pages.appActivity.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.maciej.movies4you.base.BaseViewModel
-import com.maciej.movies4you.functional.data.Constants
-import com.maciej.movies4you.functional.data.SharedPrefs
 import com.maciej.movies4you.functional.rest.RestInterface
 import com.maciej.movies4you.models.custom.search.DiscoverQueryData
 import com.maciej.movies4you.models.movies.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import okhttp3.HttpUrl
-import retrofit2.http.Query
 import javax.inject.Inject
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.inverce.mod.v2.core.verification.isNotNullOrEmpty
-import com.maciej.movies4you.functional.data.MediaType
 
 
 class SearchViewModel : BaseViewModel() {
@@ -59,20 +53,25 @@ class SearchViewModel : BaseViewModel() {
             ))
     }
 
-    fun loadSearchKeywords() {
+    fun checkNewPrefix(searchPrefix: String, done: (Boolean) -> Unit) {
         subscription.add(restInterface.getSearchKeywords(
-            keyword = searchQueryData.searchPrefix
+            prefix = searchPrefix,
+            page = 1
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .doOnSubscribe { onRequestStart() }
             .doOnTerminate { onRequestExecute() }
             .subscribe(
-                { it ->
-                    searchQueryData.keywordsIds = it.keywords.map { it.id }.toSet()
-                    loadNextMovies()
+                {
+                    if (it.keywords.isNotNullOrEmpty()) {
+                        done(true)
+                    } else {
+                        done(false)
+                    }
                 },
                 { error ->
+                    done(false)
                     onRequestError(error)
                 }
             ))
@@ -101,21 +100,14 @@ class SearchViewModel : BaseViewModel() {
         if (searchQueryData.filterData.minVoteCount != null) {
             data["vote_count.gte"] = searchQueryData.filterData.minVoteCount.toString()
         }
-        if (searchQueryData.searchPrefix.isNotNullOrEmpty()) {
-            data["with_keywords"] = searchQueryData.keywordsIds.joinToString(",")
+        if (searchQueryData.keywordId != null) {
+            data["with_keywords"] = searchQueryData.keywordId.toString()
         }
         if (searchQueryData.filterData.categories.isNotNullOrEmpty()) {
             data["with_genres"] =
                 searchQueryData.filterData.categories?.joinToString(",") { it.id.toString() } ?: ""
         }
         return data
-    }
-
-    fun changeSearchCriteriaWithNewKeywords(newQueryData: DiscoverQueryData) {
-        this.searchQueryData = newQueryData
-        pageNr = 0
-        movies.value?.clear()
-        loadSearchKeywords()
     }
 
     fun changeSearchCriteria(newQueryData: DiscoverQueryData) {

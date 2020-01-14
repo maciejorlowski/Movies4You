@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maciej.movies4you.R
 import com.maciej.movies4you.models.movies.Keyword
 
-class SearchSuggestionAdapter : RecyclerView.Adapter<SearchSuggestionAdapter.ViewHolder>(){
+typealias KeywordListener = (Int) -> Unit
+
+class SearchSuggestionAdapter(var listener: KeywordListener) : RecyclerView.Adapter<SearchSuggestionAdapter.ViewHolder>(){
 
     var listItems: List<Keyword> = emptyList()
 
@@ -23,7 +25,7 @@ class SearchSuggestionAdapter : RecyclerView.Adapter<SearchSuggestionAdapter.Vie
 
         holder.view.text = item.name
         holder.view.setOnClickListener {
-            //TODO callback with id
+            listener(item.id)
         }
     }
 
