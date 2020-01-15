@@ -16,6 +16,17 @@
                 android:checkable="false"
                 tools:ignore="MenuTitle"/>
 
+        <item android:id="@+id/popularTvShowsFragment"
+                android:title="@string/label_popular_tv_shows"
+                android:visible="true"
+                android:icon="@drawable/menu_selector"/>
+
+        <item
+                android:icon="@drawable/menu_separator"
+                android:enabled="false"
+                android:checkable="false"
+                tools:ignore="MenuTitle"/>
+
         <item android:id="@+id/myListsFragment"
               android:title="@string/label_my_lists"
               android:visible="true"

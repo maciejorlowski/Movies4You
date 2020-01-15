@@ -24,7 +24,11 @@ class HomeFragment : BaseAppFragment() {
     private val clickListener: ClickListener = this::onMovieClicked
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         return inflater.inflate(R.layout.app_fragment_home, container, false)
     }
@@ -68,8 +72,19 @@ class HomeFragment : BaseAppFragment() {
                 if (!recyclerView.canScrollVertically(1) && newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     viewModel.loadNextData()
                 }
+                if (recyclerView.canScrollVertically(-1)) {
+                    app_frag_home_view_goto_top.visibility = View.VISIBLE
+                    app_frag_home_page_label.visibility = View.GONE
+                } else {
+                    app_frag_home_view_goto_top.visibility = View.GONE
+                    app_frag_home_page_label.visibility = View.VISIBLE
+                }
             }
         })
+
+        app_frag_home_view_goto_top.setOnClickListener {
+            app_frag_home_adapter.smoothScrollToPosition(0)
+        }
 
 
         viewModel.observableProgress.observe(this, Observer {

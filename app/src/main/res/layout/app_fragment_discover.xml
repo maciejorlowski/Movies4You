@@ -9,6 +9,13 @@
         android:background="@drawable/bg"
         android:orientation="vertical">
 
+    <include
+            android:id="@+id/app_frag_discover_view_goto_top"
+            layout="@layout/view_goto_top"
+            android:visibility="gone"
+            android:tag="sticky"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/app_frag_discover_adapter"
@@ -17,7 +24,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/app_frag_discover_view_goto_top" />
 
 
     <ProgressBar

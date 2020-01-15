@@ -18,6 +18,7 @@
     <string name="label_watchlist">Lista obejrzanych</string>
     <string name="label_rated">Lista ocenionych</string>
     <string name="label_other">Własna lista</string>
+    <string name="label_popular_tv_shows">Popularne Seriale</string>
 
     <!--TOASTS-->
     <string name="toast_new_list_empty_title">Tytuł listy nie może pozostać pusty!</string>

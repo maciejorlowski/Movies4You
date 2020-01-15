@@ -137,12 +137,21 @@ class SearchFragment : BaseAppFragment(), SearchSuggestionDialog.SuggestionDialo
 
     private fun setupListeners() {
 
+        app_frag_discover_view_goto_top.setOnClickListener {
+            app_frag_discover_adapter.smoothScrollToPosition(0)
+        }
+
         app_frag_discover_adapter.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1) && newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     viewModel.loadNextMovies()
+                }
+                if (recyclerView.canScrollVertically(-1)) {
+                    app_frag_discover_view_goto_top.visibility = View.VISIBLE
+                } else {
+                    app_frag_discover_view_goto_top.visibility = View.GONE
                 }
             }
         })

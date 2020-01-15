@@ -85,7 +85,11 @@ interface RestInterface {
     fun getMovieCategories(@Query("api_key") apiKey: String = Constants.API_KEY, @Query("language") language: String = SharedPrefs.getLanguageCode()): Observable<CategoriesResponse>
 
     @GET("search/keyword")
-    fun getSearchKeywords(@Query("api_key") apiKey: String = Constants.API_KEY, @Query("query") prefix: String, @Query("page") page: Int) : Observable<KeywordsResponse>
+    fun getSearchKeywords(
+        @Query("api_key") apiKey: String = Constants.API_KEY, @Query("query") prefix: String, @Query(
+            "page"
+        ) page: Int
+    ): Observable<KeywordsResponse>
     //----------------------------------LISTS---------------------------------------------------------
 
     @GET("account/{account_id}/lists")
@@ -148,6 +152,14 @@ interface RestInterface {
     ): Observable<SimpleResponse>
 
     //----------------------------------------------------TV SHOWS------------------------------------------------------------------------------------------
+
+    @GET("tv/popular")
+    fun getPopularTvShows(
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+        @Query("language") language: String = SharedPrefs.getLanguageCode(),
+        @Query("page") page: Int
+    ): Observable<TvShowsResponse>
+
     @GET("tv/{tv_id}")
     fun getTVShowDetails(@Path("tv_id") tvId: Int, @Query("api_key") apiKey: String, @Query("language") language: String): Observable<MovieDetails>
 

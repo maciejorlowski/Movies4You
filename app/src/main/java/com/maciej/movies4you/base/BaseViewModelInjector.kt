@@ -12,6 +12,7 @@ import com.maciej.movies4you.pages.appActivity.myLists.myLists.MyListsViewModel
 import com.maciej.movies4you.pages.appActivity.myLists.singleList.MySingleListViewModel
 import com.maciej.movies4you.pages.appActivity.search.filter.FilterViewModel
 import com.maciej.movies4you.pages.appActivity.search.suggestions.SearchSuggestionViewModel
+import com.maciej.movies4you.pages.appActivity.tv_shows.popular.PopularTvShowsViewModel
 import com.maciej.movies4you.pages.entryActivity.login.LoginViewModel
 
 abstract class BaseViewModelInjector : ViewModel() {
@@ -40,7 +41,8 @@ abstract class BaseViewModelInjector : ViewModel() {
             is MovieDetailsReviewsViewModel -> injector.injectMovieDetailsReviews(this)
             is AddMovieToListViewModel -> injector.injectAddMovieToList(this)
             is FilterViewModel -> injector.injectFilter(this)
-            is SearchSuggestionViewModel -> injector.searchSuggestion(this)
+            is SearchSuggestionViewModel -> injector.injectSearchSuggestion(this)
+            is PopularTvShowsViewModel -> injector.injectPopularTvShows(this)
         }
     }
 }
