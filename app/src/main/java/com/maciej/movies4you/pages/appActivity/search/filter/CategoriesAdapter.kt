@@ -27,7 +27,7 @@ class CategoriesAdapter(var selectedItems: MutableList<Category>) :
         holder.view.setOnCheckedChangeListener { _, isChecked ->
             when (isChecked) {
                 true -> selectedItems.add(item)
-                false -> selectedItems.remove(item)
+                false -> selectedItems.remove(selectedItems.find { it.id == item.id })
             }
         }
     }

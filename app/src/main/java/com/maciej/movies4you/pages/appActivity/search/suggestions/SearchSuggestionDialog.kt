@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maciej.movies4you.R
 import com.maciej.movies4you.base.BaseAppDialog
 import com.maciej.movies4you.functional.applyArguments
-import com.maciej.movies4you.functional.rxbus.RxEvent
 import com.maciej.movies4you.functional.viewModel
 import kotlinx.android.synthetic.main.dialog_search_suggestion.*
 

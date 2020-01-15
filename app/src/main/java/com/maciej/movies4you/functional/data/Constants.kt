@@ -10,4 +10,9 @@ object Constants {
         const val REGISTER_URL = "https://www.themoviedb.org/account/signup"
         const val IMAGES_URL = "http://image.tmdb.org/t/p/original/"
     }
+
+    object StatusCodes{
+        const val PERMISSION_CODE = 3
+        const val INTERNAL_ERROR = 11
+    }
 }

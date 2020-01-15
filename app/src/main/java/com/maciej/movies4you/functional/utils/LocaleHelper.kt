@@ -25,16 +25,31 @@ object LocaleHelper {
     }
 
     fun setLocale (context: Context, language: String) : Context{
-        return updateResources(context, language)
+        return updateResourcesLegacy(context, language)
     }
 
-    private fun updateResources(context: Context, language: String): Context {
+    // API 24
+//    private fun updateResources(context: Context, language: String): Context {
+//        val locale = Locale(language)
+//        Locale.setDefault(locale)
+//
+//        val configuration = context.resources.configuration
+//        configuration.setLocale(locale)
+//
+//        return context.createConfigurationContext(configuration)
+//    }
+
+    private fun updateResourcesLegacy(context: Context, language: String): Context {
         val locale = Locale(language)
         Locale.setDefault(locale)
 
-        val configuration = context.resources.configuration
-        configuration.setLocale(locale)
+        val resources = context.resources
 
-        return context.createConfigurationContext(configuration)
+        val configuration = resources.configuration
+        configuration.locale = locale
+
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+
+        return context
     }
 }

@@ -7,6 +7,7 @@ import com.maciej.movies4you.functional.data.Constants
 import com.maciej.movies4you.functional.data.SharedPrefs
 import com.maciej.movies4you.base.BaseViewModel
 import com.maciej.movies4you.functional.rest.RestInterface
+import com.maciej.movies4you.functional.utils.ErrorParser
 import com.maciej.movies4you.models.body.ListBody
 import com.maciej.movies4you.models.movies.UserList
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,7 +27,7 @@ class MyListsViewModel : BaseViewModel() {
     @Inject
     lateinit var restInterface: RestInterface
 
-    fun init(){
+    fun init() {
         loadLists()
     }
 
@@ -84,8 +85,13 @@ class MyListsViewModel : BaseViewModel() {
                 .subscribe(
                     {
                         lists.value?.remove(list)
+                        lists.value = lists.value
                     }, { error ->
                         onRequestError(error)
+                        if (errorCode == Constants.StatusCodes.INTERNAL_ERROR) {
+                            lists.value?.remove(list)
+                            lists.value = lists.value
+                        }
                     }
                 ))
     }

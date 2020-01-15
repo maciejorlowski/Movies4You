@@ -23,6 +23,7 @@ abstract class BaseViewModel : BaseViewModelInjector() {
     val TAG = javaClass.simpleName
 
     private var errorMessage = MutableLiveData<String>()
+    protected var errorCode : Int? = null
     protected var progressVisibility = MutableLiveData<Boolean>()
 
     val observableErrorMessage: LiveData<String>
@@ -54,7 +55,9 @@ abstract class BaseViewModel : BaseViewModelInjector() {
     }
 
     protected open fun onRequestError(error: Throwable) {
-        errorMessage.value = ErrorParser.parseError(error, retrofit)
+        val error = ErrorParser.parseError(error, retrofit)
+        errorMessage.value = error?.message
+        errorCode = error?.code
     }
 
     protected operator fun CompositeDisposable.plusAssign(subscribe: Disposable) {

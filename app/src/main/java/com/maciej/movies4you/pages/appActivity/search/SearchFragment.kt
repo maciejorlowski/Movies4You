@@ -80,6 +80,11 @@ class SearchFragment : BaseAppFragment(), SearchSuggestionDialog.SuggestionDialo
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        actions?.topBar()?.updateSearchCriteria(DiscoverQueryData())
+    }
+
     private fun setupObservables() {
         viewModel.observableMovies.observe(this, Observer {
             if (it.isNotNullOrEmpty()) {
