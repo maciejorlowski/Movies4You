@@ -2,10 +2,9 @@ package com.maciej.movies4you.pages.appActivity.movieDetails.addMovieToList
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.*
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +12,7 @@ import com.inverce.mod.v2.core.IMEx
 import com.inverce.mod.v2.core.onUi
 import com.inverce.mod.v2.core.utils.Screen
 import com.inverce.mod.v2.core.verification.isNotNullOrEmpty
+import com.maciej.movies4you.DefaultEnterListener
 import com.maciej.movies4you.R
 import com.maciej.movies4you.base.BaseAppDialog
 import com.maciej.movies4you.functional.applyArguments
@@ -110,6 +110,34 @@ class AddMovieToListDialog : BaseAppDialog() {
         dialog_add_movie_to_list_close.setOnClickListener {
             dismiss()
         }
+
+        dialog_add_movie_to_list_search_input.setOnKeyListener(object : DefaultEnterListener(false) {
+            override fun onKeyEnter(view: View, keyEvent: KeyEvent) {
+                if (dialog_add_movie_to_list_search_input.text.isNotEmpty()) {
+                    viewModel.filterLists(dialog_add_movie_to_list_search_input.text.toString())
+                }
+            }
+        })
+
+        dialog_add_movie_to_list_search_icon.setOnClickListener {
+            viewModel.filterLists(dialog_add_movie_to_list_search_input.text.toString())
+        }
+
+        dialog_add_movie_to_list_search_input.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s.toString().isEmpty()) {
+                    viewModel.filterLists("")
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                //ignore
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //ignore
+            }
+        })
 
         listClickedListener = {
             viewModel.addMovieToList(it, arguments?.getInt(MOVIE_ID) ?: 0) { success ->

@@ -14,20 +14,20 @@ import javax.inject.Inject
 
 class AddMovieToListViewModel : BaseViewModel() {
 
-
-    private var lists = MutableLiveData<MutableList<UserList>>()
+    private var fullLists: MutableList<UserList> = mutableListOf()
+    private var filteredLists = MutableLiveData<MutableList<UserList>>()
 
     var pageNr: Int = 1
 
-
     val observableLists: LiveData<MutableList<UserList>>
-        get() = lists
+        get() = filteredLists
 
     @Inject
     lateinit var restInterface: RestInterface
 
 
     init {
+        filteredLists.value = mutableListOf()
         loadLists()
     }
 
@@ -45,9 +45,8 @@ class AddMovieToListViewModel : BaseViewModel() {
                 .doOnTerminate { onRequestExecute() }
                 .subscribe(
                     {
-                        lists.value = mutableListOf()
-                        lists.value?.addAll(it.lists)
-                        lists.value = lists.value
+                        fullLists.addAll(it.lists)
+                        filteredLists.value = fullLists
                     },
                     { error ->
                         onRequestError(error)
@@ -55,7 +54,7 @@ class AddMovieToListViewModel : BaseViewModel() {
                 ))
     }
 
-    fun addMovieToList(listId: Int, movieId: Int,done: (Boolean) -> Unit) {
+    fun addMovieToList(listId: Int, movieId: Int, done: (Boolean) -> Unit) {
         subscription.add(restInterface.addMovieToList(
             listId,
             ManageListContentBody(movieId)
@@ -65,7 +64,7 @@ class AddMovieToListViewModel : BaseViewModel() {
             .doOnTerminate { onRequestExecute() }
             .subscribe(
                 {
-                    lists.value?.find { it.id == listId }?.itemCount?.plus(1)
+                    filteredLists.value?.find { it.id == listId }?.itemCount?.plus(1)
                     done(true)
                 },
                 { error ->
@@ -75,7 +74,13 @@ class AddMovieToListViewModel : BaseViewModel() {
             ))
     }
 
-
+    fun filterLists(prefix: String) {
+        if (prefix.isNotEmpty()) {
+            filteredLists.value = fullLists.filter { it.listName.contains(prefix) }.toMutableList()
+        } else {
+            filteredLists.value = fullLists
+        }
+    }
 }
 
 

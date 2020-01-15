@@ -2,12 +2,14 @@ package com.maciej.movies4you.pages.appActivity.details.topbar.extendedViews
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import com.inverce.mod.v2.core.IMEx
 import com.inverce.mod.v2.core.utils.hideSoftInput
+import com.maciej.movies4you.DefaultEnterListener
 import com.maciej.movies4you.functional.data.MediaType
 import com.maciej.movies4you.functional.rxbus.RxBus
 import com.maciej.movies4you.functional.rxbus.RxEvent
@@ -16,6 +18,7 @@ import com.maciej.movies4you.pages.appActivity.search.sorting.SortingDialog
 import kotlinx.android.synthetic.main.view_topbar_extended_discover.view.*
 import com.maciej.movies4you.R
 import com.maciej.movies4you.pages.appActivity.search.filter.FilterDialog
+import kotlinx.android.synthetic.main.dialog_add_movie_to_list.*
 
 
 class TopBarDiscoverExtendedView @JvmOverloads constructor(
@@ -76,5 +79,13 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
                 hideSoftInput()
             }
         }
+
+        top_bar_extended_discover_inputPrefix.setOnKeyListener(object : DefaultEnterListener(false) {
+            override fun onKeyEnter(view: View, keyEvent: KeyEvent) {
+                if (top_bar_extended_discover_inputPrefix.text.length > 2) {
+                    RxBus.publish(RxEvent.EventSearchMoviesPrefix(top_bar_extended_discover_inputPrefix.text.toString()))
+                }
+            }
+        })
     }
 }
