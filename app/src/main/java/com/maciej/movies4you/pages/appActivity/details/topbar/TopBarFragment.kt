@@ -11,6 +11,7 @@ import com.maciej.movies4you.functional.database.MyDatabase
 import com.maciej.movies4you.models.custom.search.DiscoverQueryData
 import com.maciej.movies4you.models.interfaces.interactions.TopBarInteractions
 import kotlinx.android.synthetic.main.view_topbar.*
+import kotlinx.android.synthetic.main.view_topbar_extended_discover.*
 
 class TopBarFragment : BaseAppFragment(), TopBarInteractions {
 
@@ -58,6 +59,7 @@ class TopBarFragment : BaseAppFragment(), TopBarInteractions {
 
     override fun showExtendedView(value: Boolean, data: DiscoverQueryData?) {
         fragment_top_bar_discover_view.visibility = if (value) View.VISIBLE else View.GONE
+        top_bar_extended_discover_inputPrefix.text.clear()
     }
 
     override fun updateSearchCriteria(value: DiscoverQueryData) {

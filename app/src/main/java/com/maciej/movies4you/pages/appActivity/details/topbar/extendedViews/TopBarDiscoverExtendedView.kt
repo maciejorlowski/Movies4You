@@ -41,7 +41,7 @@ class TopBarDiscoverExtendedView @JvmOverloads constructor(
             ArrayAdapter<MediaType>(
                 IMEx.context,
                 R.layout.spinner_language_item,
-                MediaType.values()
+                listOf(MediaType.Movie)
             )
 
         top_bar_extended_discover_type_spinner.onItemSelectedListener =
