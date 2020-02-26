@@ -60,10 +60,5 @@
                 app:exitAnim="@anim/exit_slide_down" app:popEnterAnim="@anim/pop_enter_slide_up"
                 app:popExitAnim="@anim/pop_exit_slide_up"/>
     </fragment>
-    <fragment
-            android:id="@+id/popularTvShowsFragment"
-            android:name="com.maciej.movies4you.pages.appActivity.tv_shows.popular.PopularTvShowsFragment"
-            android:label="PopularTvShowsFragment"
-            tools:layout="@layout/app_fragment_popular_tv_shows"/>
 
 </navigation>

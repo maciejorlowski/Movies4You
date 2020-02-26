@@ -27,7 +27,7 @@
     <!--LOGIN-->
     <string name="login_button">Zaloguj się</string>
     <string name="login_as_guest_button">Zaloguj się jako gość</string>
-    <string name="login_login_hint">login</string>
+    <string name="login_login_hint">nazwa użytkownika</string>
     <string name="login_password_hint">hasło</string>
 
     <string name="login_no_account_text">Nie masz konta?</string>
@@ -79,7 +79,7 @@
 
     <string name="dial_confirm_positive_btn">Zatwierdź</string>
     <string name="dial_confirm_negative_btn">Odrzuć</string>
-    <string name="label_discover_movies">Odkryj filmy</string>
+    <string name="label_discover_movies">Wyszukaj filmy</string>
 
     <!--SEARCH-->
     <string name="search_enter_prefix_hint">Wpisz wyszukiwaną frazę</string>
@@ -113,5 +113,8 @@
         <item>Aktorzy</item>
         <item>Recenzje</item>
     </string-array>
+
+
+    <string name="list_no_elements">Lista nie posiada żadnych pozycji.</string>
 
 </resources>

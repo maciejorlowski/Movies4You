@@ -93,6 +93,9 @@
     <!--    FILTER DIALOG-->
     <string name="search_filter_dialog_min_year">min year</string>
 
+    <string name="search_suggesstion_dialog_label">Choose search phrase</string>
+
+
     <!--    PERMISSION DIALOG-->
     <string name="permission_dialog_action_text">Login as TMDB user.</string>
     <string name="permission_dialog_description">You do not have permission to perform this action.</string>
@@ -108,4 +111,6 @@
     <string name="popularity_low">Low</string>
     <string name="popularity_medium">Medium</string>
     <string name="search_filter_dialog_max_year">max year</string>
+    <string name="list_no_elements">List has no items.</string>
+
 </resources>

@@ -69,7 +69,12 @@ class MySingleListFragment : BaseAppFragment(), ConfirmDialog.ConfirmDialogResul
             }
         })
         viewModel.observableMoviesList.observe(this, Observer {
-            singleListAdapter.update(it)
+            if(!it.isEmpty()){
+                singleListAdapter.update(it)
+                app_frag_sigle_list_empty.visibility = View.GONE
+            } else{
+                app_frag_sigle_list_empty.visibility = View.VISIBLE
+            }
         })
 
         viewModel.observableListName.observe(this, Observer {

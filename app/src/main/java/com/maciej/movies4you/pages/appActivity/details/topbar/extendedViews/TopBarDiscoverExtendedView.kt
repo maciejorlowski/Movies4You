@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import com.inverce.mod.v2.core.IMEx
 import com.inverce.mod.v2.core.utils.hideSoftInput
-import com.maciej.movies4you.DefaultEnterListener
+import com.maciej.movies4you.functional.utils.DefaultEnterListener
 import com.maciej.movies4you.functional.data.MediaType
 import com.maciej.movies4you.functional.rxbus.RxBus
 import com.maciej.movies4you.functional.rxbus.RxEvent
@@ -18,7 +18,6 @@ import com.maciej.movies4you.pages.appActivity.search.sorting.SortingDialog
 import kotlinx.android.synthetic.main.view_topbar_extended_discover.view.*
 import com.maciej.movies4you.R
 import com.maciej.movies4you.pages.appActivity.search.filter.FilterDialog
-import kotlinx.android.synthetic.main.dialog_add_movie_to_list.*
 
 
 class TopBarDiscoverExtendedView @JvmOverloads constructor(

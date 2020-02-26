@@ -1,4 +1,4 @@
-package com.maciej.movies4you;
+package com.maciej.movies4you.functional.utils;
 
 
 import android.view.KeyEvent;

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.inverce.mod.v2.core.IMEx
+import com.inverce.mod.v2.core.activity
 import com.maciej.movies4you.functional.data.Constants
 import com.maciej.movies4you.pages.entryActivity.EntryActivity
 
@@ -24,6 +25,7 @@ class MyWebViewClient : WebViewClient() {
         val intent = Intent(IMEx.context, EntryActivity::class.java)
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
         IMEx.context.startActivity(intent)
+        activity?.finish()
         return true
     }
 }
